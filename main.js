@@ -87,3 +87,7 @@ const main = () => {
   })
 }
 common.print(common.largeMapGen(smallMap));
+
+module.exports = {
+  generatedMap
+};
