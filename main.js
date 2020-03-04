@@ -28,32 +28,32 @@ const keyProcessor = (key) => {
     process.exit(0);
   }
   if (key === 'w' && playerX > 1 && smallMap[playerX - 1][playerY] === 0) {
-    // console.clear();
+    console.clear();
     smallMap[playerX][playerY] = 0;
     playerX--;
     smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
+    common.print(common.largeMapGen(smallMap));
   }
   if (key === 's' && playerX < smallMap.length - 2 && smallMap[playerX + 1][playerY] === 0) {
-    // console.clear();
+    console.clear();
     smallMap[playerX][playerY] = 0;
     playerX++;
     smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
+    common.print(common.largeMapGen(smallMap));
   }
   if (key === 'a' && playerY > 1 && smallMap[playerX][playerY - 1] === 0) {
-    // console.clear();
+    console.clear();
     smallMap[playerX][playerY] = 0;
     playerY--;
     smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
+    common.print(common.largeMapGen(smallMap));
   }
   if (key === 'd' && playerY < smallMap[0].length - 2 && smallMap[playerX][playerY + 1] === 0) {
-    // console.clear();
+    console.clear();
     smallMap[playerX][playerY] = 0;
     playerY++;
     smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
+    common.print(common.largeMapGen(smallMap));
   }
 };
 stdin.on('data', keyProcessor);

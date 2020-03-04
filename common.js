@@ -1,4 +1,5 @@
 const print = (printable) => {
+  console.clear();
   for (let i = 0; i < printable.length; i++) {
     console.log(printable[i].join('').toString());
   }
