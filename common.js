@@ -50,6 +50,13 @@ const largeMapGen = (smallMap) => {
           }
         }
       }
+      if (smallMap[i][j] === 'X') {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 8; j++) {
+            board[a + i][b + j] = 'X';
+          }
+        }
+      }
     }
   }
 
@@ -65,7 +72,26 @@ const largeMapGen = (smallMap) => {
   return board;
 };
 
+const generatedMap = (sourceMap) => {
+  for (let i = 0; i < sourceMap.length; i++) {
+    for (let j = 0; j < sourceMap[i].length; j++) {
+      if (sourceMap[i][j] === 1) {
+        sourceMap[1 + Math.round(Math.random() * 10)][5] = Math.round(Math.random());
+        // sourceMap[1 + Math.round(Math.random() * 10)][9] = Math.round(Math.random());
+        sourceMap[1 + Math.round(Math.random() * 10)][13] = Math.round(Math.random());
+        // sourceMap[1 + Math.round(Math.random() * 10)][17] = Math.round(Math.random());
+        sourceMap[5][Math.round(Math.random() * 21) + 1] = Math.round(Math.random());
+        sourceMap[9][Math.round(Math.random() * 21) + 1] = Math.round(Math.random());
+      }
+    }
+  }
+  return sourceMap;
+};
+
+
+
 module.exports = {
   print,
-  largeMapGen
+  largeMapGen,
+  generatedMap
 };
