@@ -6,22 +6,40 @@ playerX = 0;
 playerY = 0;
 
 const keyProcessor = (key) => {
+  if (key === 'q') {
+    process.exit[0];
+  }
 
   if (key === 'w' && i > 0) {
-    array[i][j] = ' ';
+    map[i][j] = ' ';
     i--;
-    array[i][j] = playerX;
-  } else if (key === 's' && i > 0) {
-    array[i][j] = ' ';
+    map[i][j] = playerX;
+  }
+  if (key === 's' && i > 0) {
+    map[i][j] = ' ';
     i++;
-    array[i][j] = playerX;
-  } else if (key === 'a' && j < array.length) {
-    array[i][j] = ' ';
+    map[i][j] = playerX;
+  }
+  if (key === 'a' && j < map.length - 1) {
+    map[i][j] = ' ';
     j++
-    array[i][j] = playerY;
-  } else if (key === 'd' && j < array.length) {
-    array[i][j] = ' ';
+    map[i][j] = playerY;
+  }
+  if (key === 'd' && j < map.length) {
+    map[i][j] = ' ';
     j--;
-    array[i][j] = playerY;
+    map[i][j] = playerY;
   }
 };
+stdin.on('data', keyProcessor);
+
+const player = () => {
+  map[i][j] = 'P';
+  return '';
+};
+
+
+
+
+
+
