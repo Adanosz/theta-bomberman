@@ -39,9 +39,6 @@ for (let i = 0; i < menuArr.length; i++) {
 let position1 = 13;
 let position2 = 60;
 
-menuArr[0][0] = position1;
-menuArr[1][0] = position2;
-
 const move = () => {
   for (let i = position1, k = 0; k < arrowLeft.length; i++ , k++) {
     for (let j = position2, m = 0; m < arrowLeft[k].length; j++ , m++) {
