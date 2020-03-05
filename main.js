@@ -1,4 +1,5 @@
 const common = require('./common.js');
+const boosters = require('./boosters.js');
 
 const stdin = process.stdin;
 stdin.setRawMode(true);
@@ -61,4 +62,5 @@ stdin.on('data', keyProcessor);
 smallMap = common.generatedMap(smallMap);
 let board = common.largeMapGen(smallMap);
 
-setInterval(() => { common.print(common.largeMapGen(smallMap)) }, 200);
+// setInterval(() => { common.print(common.largeMapGen(smallMap)) }, 200);
+boosters.boosters(smallMap);
