@@ -155,8 +155,40 @@ const keyProcessor = (key) => {
   if (key === '\u0030') {
     placeBombPlayer2();
   }
+  if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0) {
+    // console.clear();
+    smallMap[player2X][player2Y] = 0;
+    player2X--;
+    smallMap[player2X][player2Y] = 'X';
+    // common.print(common.largeMapGen(smallMap));
+  }
+  if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0) {
+    // console.clear();
+    smallMap[player2X][player2Y] = 0;
+    player2X++;
+    smallMap[player2X][player2Y] = 'X';
+    // common.print(common.largeMapGen(smallMap));
+  }
+  if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0) {
+    // console.clear();
+    smallMap[player2X][player2Y] = 0;
+    player2Y--;
+    smallMap[player2X][player2Y] = 'X';
+    // common.print(common.largeMapGen(smallMap));
+  }
+  if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0) {
+    // console.clear();
+    smallMap[player2X][player2Y] = 0;
+    player2Y++;
+    smallMap[player2X][player2Y] = 'X';
+    // common.print(common.largeMapGen(smallMap));
+  }
 };
 stdin.on('data', keyProcessor);
+
+const keyProcessor2 = (key) => {
+}
+stdin.on('data', keyProcessor2);
 
 smallMap = common.generatedMap(smallMap);
 let board = common.largeMapGen(smallMap);

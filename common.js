@@ -57,6 +57,27 @@ const largeMapGen = (smallMap) => {
           }
         }
       }
+      if (smallMap[i][j] === 'Y') {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 8; j++) {
+            board[a + i][b + j] = 'Y';
+          }
+        }
+      }
+      if (smallMap[i][j] === '*') {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 8; j++) {
+            board[a + i][b + j] = '*';
+          }
+        }
+      }
+      if (smallMap[i][j] === 9) {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 8; j++) {
+            board[a + i][b + j] = 9;
+          }
+        }
+      }
     }
   }
 
