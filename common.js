@@ -4,13 +4,52 @@ const print = (printable) => {
   }
 };
 
-const largeMapGen = (smallMap) => {
+let smallMap = [
+  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+  [2, 'X', 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+  [2, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
+  [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
+  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
+  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
+  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2],
+  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 2],
+  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 'Y', 2],
+  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+];
 
+const explode = () => {
+  for (let i = 0; i < smallMap.length; i++) {
+    for (let j = 0; j < smallMap[i].length; j++) {
+      if (smallMap[i][j] === 9 && smallMap[i + 1][j] === 1) {
+        smallMap[i + 1][j] = 0;
+      }
+      if (smallMap[i][j] === 9 && smallMap[i - 1][j] === 1) {
+        smallMap[i - 1][j] = 0;
+      }
+      if (smallMap[i][j] === 9 && smallMap[i][j + 1] === 1) {
+        smallMap[i][j + 1] = 0;
+      }
+      if (smallMap[i][j] === 9 && smallMap[i][j - 1] === 1) {
+        smallMap[i][j - 1] = 0;
+      }
+      if (smallMap[i][j] === 9) {
+        smallMap[i][j] = 0;
+      }
+    }
+  }
+};
+
+
+const largeMapGen = (smallMap) => {
   // make a 200x52 array, will be spliced to 176x44
   let board = new Array(52);
   for (let i = 0; i < board.length; i++) {
     board[i] = new Array(200);
   }
+
   // elements
   const freeSpace = ['░'];
   const softWall = ['█'];
@@ -79,6 +118,7 @@ const largeMapGen = (smallMap) => {
         }
       }
     }
+    explode();
   }
 
   // splice as promised
@@ -109,10 +149,10 @@ const generatedMap = (sourceMap) => {
   return sourceMap;
 };
 
-
-
 module.exports = {
   print,
   largeMapGen,
-  generatedMap
+  generatedMap,
+  explode,
+  smallMap
 };

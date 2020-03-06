@@ -1,5 +1,5 @@
 const common = require('./common.js');
-const boosters = require('./boosters.js');
+// const boosters = require('./boosters.js');
 
 const stdin = process.stdin;
 stdin.setRawMode(true);
@@ -10,21 +10,6 @@ let playerX = 1;
 let playerY = 1;
 let player2X = 11;
 let player2Y = 23;
-let smallMap = [
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-  [2, 'X', 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 'Y', 2],
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-];
 
 const keyProcessor = (key) => {
   if (key === 'q') {
@@ -156,46 +141,14 @@ const keyProcessor = (key) => {
   if (key === '\u0030') {
     placeBombPlayer2();
   }
-  if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 0;
-    player2X--;
-    smallMap[player2X][player2Y] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  }
-  if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 0;
-    player2X++;
-    smallMap[player2X][player2Y] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  }
-  if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 0;
-    player2Y--;
-    smallMap[player2X][player2Y] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  }
-  if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 0;
-    player2Y++;
-    smallMap[player2X][player2Y] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  }
 };
 stdin.on('data', keyProcessor);
-
-const keyProcessor2 = (key) => {
-}
-stdin.on('data', keyProcessor2);
-
+let smallMap = common.smallMap;
 smallMap = common.generatedMap(smallMap);
 let board = common.largeMapGen(smallMap);
 
 // setInterval(() => { common.print(common.largeMapGen(smallMap)) }, 200);
-boosters.boosters(smallMap);
+// boosters.boosters(smallMap);
 setInterval(() => { common.print(common.largeMapGen(smallMap)) }, 200);
 
 let bomb = 9;
@@ -206,14 +159,14 @@ const placeBombPlayer1 = () => {
   if (player1bomb > 0) {
     smallMap[playerX][playerY] = bomb;
     player1bomb--;
-    // explode();
+    common.explode();
   }
-};
+}
 
 const placeBombPlayer2 = () => {
   if (player2bomb > 0) {
     smallMap[player2X][player2Y] = bomb;
     player2bomb--;
-    // explode();
+    common.explode();
   }
 };
