@@ -106,7 +106,7 @@ const menuArrGen = () => {
   return menuArr;
 }
 let menuArr = menuArrGen();
-const menuSelectionMove = () => {
+const menuSelectionMove = () => { // leftArrow, rightArrow
   // moves the selections arrays
   // used in menu after menuSelectionDel
   for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++ , k++) {

@@ -15,7 +15,8 @@ const keyProcessor = (key) => {
           common.print(optionsFunc());
           break;
         case 27:
-          // credits
+          setInterval(() => {common.print(creditsFunc())}, 250);
+          // common.print(creditsFunc());
           break;
         case 34:
           process.exit(0);
@@ -82,6 +83,11 @@ const keyProcessor = (key) => {
     }
 
     if (key === '\u0020' && position1 === 34) {
+      common.print(menuFunc());
+    }
+  }
+  if (blindset === 2) {
+    if (key === '\u0020') {
       common.print(menuFunc());
     }
   }
@@ -229,6 +235,25 @@ const optionsFunc = () => {
   }
   return menuArr;
 }
+
+const creditsFunc = () => {
+  // blindset = 2;
+  console.clear();
+  common.clearArr(menuArr);
+  let ind = 0;
+  if (ind < 130) {
+  for (let i = 0; i < menuArr.length; i++) {
+    for (let j = 0; j < menuArr[i].length; j++) {
+      menuArr[i][j] = arrays.creatorsArr[i][j];
+    }
+  }
+  arrays.creatorsArr.splice(0, 1);
+  let test = [' ', ' ', ' '];
+  arrays.creatorsArr.push(test);
+  ind++;
+}
+  return menuArr;
+};
 
 
 common.print(menuFunc());
