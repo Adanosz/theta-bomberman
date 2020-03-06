@@ -7,25 +7,12 @@ const print = (printable) => {
     console.log(printable[i].join('').toString());
   }
 };
+let smallMap = arrays.smallMap;
 
-let smallMap = [
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-  [2, 'X', 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 3, 0, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 'Y', 2],
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-];
 let explodeRange = 1;
-// This function is for the bomb explosion. If there is a destructible object next to a bomb, then it will be vanish.
 const explode1 = () => {
+  // This function is for the bomb explosion. If there is a destructible object next to a bomb,
+  // then it will be vanish.
   for (let i = 0; i < smallMap.length; i++) {
     for (let j = 0; j < smallMap[i].length; j++) {
       if (smallMap[i][j] === 9 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
@@ -87,82 +74,46 @@ const largeMapGen = (smallMap) => {
   let position2 = 0;
   for (let i = 0, a = position1; i < smallMap.length; i++ , a += 4) {
     for (let j = 0, b = position2; j < smallMap[i].length; j++ , b += 8) {
-      if (smallMap[i][j] === 0) {
+      const largeMapGenAssistant = (type) => {
         for (let i = 0; i < 4; i++) {
           for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = freeSpace[0];
+            board[a + i][b + j] = type;
           }
         }
       }
-      if (smallMap[i][j] === 1) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = softWall[0];
-          }
-        }
-      }
-      if (smallMap[i][j] === 2) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = border[0];
-          }
-        }
-      }
-      if (smallMap[i][j] === 3) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = fixWall[0];
-          }
-        }
-      }
-      if (smallMap[i][j] === 5) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 5;
-          }
-        }
-      }
-      if (smallMap[i][j] === 'X') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'X';
-          }
-        }
-      }
-      if (smallMap[i][j] === 'Y') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'Y';
-          }
-        }
-      }
-      if (smallMap[i][j] === '*') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = '*';
-          }
-        }
-      }
-      if (smallMap[i][j] === 9) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 9;
-          }
-        }
-      }
-      if (smallMap[i][j] === '#') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = '#';
-          }
-        }
-      }
-      if (smallMap[i][j] === 8) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 8;
-          }
-        }
+      switch (smallMap[i][j]) {
+        case 0:
+          largeMapGenAssistant(freeSpace[0]);
+          break;
+        case 1:
+          largeMapGenAssistant(softWall[0]);
+          break;
+        case 2:
+          largeMapGenAssistant(border[0]);
+          break;
+        case 3:
+          largeMapGenAssistant(fixWall[0]);
+          break;
+        case 5:
+          largeMapGenAssistant(5);
+          break;
+        case 'X':
+          largeMapGenAssistant('X');
+          break;
+        case 'Y':
+          largeMapGenAssistant('Y');
+          break;
+        case '*':
+          largeMapGenAssistant('*');
+          break;
+        case 9:
+          largeMapGenAssistant(9);
+          break;
+        case '#':
+          largeMapGenAssistant('#');
+          break;
+        case 8:
+          largeMapGenAssistant(8);
       }
     }
   }
@@ -257,6 +208,5 @@ module.exports = {
   menuSelectionDel,
   clearArr,
   explode1,
-  explode2,
-  smallMap
+  explode2
 };

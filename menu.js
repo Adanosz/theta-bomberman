@@ -15,8 +15,7 @@ const keyProcessor = (key) => {
           common.print(optionsFunc());
           break;
         case 27:
-          setInterval(() => {common.print(creditsFunc())}, 250);
-          // common.print(creditsFunc());
+          common.print(creditsFunc());
           break;
         case 34:
           process.exit(0);
@@ -87,13 +86,15 @@ const keyProcessor = (key) => {
     }
   }
   if (blindset === 2) {
-    if (key === '\u0020') {
+    if (key === 'q') {
       common.print(menuFunc());
     }
   }
 };
+
 stdin.on('data', keyProcessor);
 let blindset;
+let ind = 0;
 
 let position1 = 13;
 let position2 = 60;
@@ -237,21 +238,20 @@ const optionsFunc = () => {
 }
 
 const creditsFunc = () => {
-  // blindset = 2;
-  console.clear();
-  common.clearArr(menuArr);
-  let ind = 0;
-  if (ind < 130) {
-  for (let i = 0; i < menuArr.length; i++) {
-    for (let j = 0; j < menuArr[i].length; j++) {
-      menuArr[i][j] = arrays.creatorsArr[i][j];
+  var stopInterval = setInterval(() => { common.print(credistFuncInner()) }, 250);
+
+  const credistFuncInner = () => {
+    menuArr.splice(0, 1);
+    menuArr.push(arrays.creatorsArr[0]);
+    arrays.creatorsArr.splice(0, 1);
+    common.print(menuArr);
+    if (arrays.creatorsArr.length === 1) {
+      clearInterval(stopInterval);
+      stopInterval = 0;
+      common.print(menuFunc());
     }
+    return menuArr;
   }
-  arrays.creatorsArr.splice(0, 1);
-  let test = [' ', ' ', ' '];
-  arrays.creatorsArr.push(test);
-  ind++;
-}
   return menuArr;
 };
 
