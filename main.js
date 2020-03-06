@@ -79,14 +79,14 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2X--;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2X--;
@@ -94,14 +94,14 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2X++;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2X++;
@@ -109,14 +109,14 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2Y--;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2Y--;
@@ -124,14 +124,14 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2Y++;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2Y++;
