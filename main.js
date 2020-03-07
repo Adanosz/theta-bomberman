@@ -16,104 +16,156 @@ let player2Y = 23;
 
 // If 'q' is pressed, exit the program.
 const keyProcessor = (key) => {
+
+  let playerXcanUp;
+  let playerXcanDown;
+  let playerXcanRight;
+  let playerXcanLeft;
+
+  if (playerX > 1 && arrays.smallMap[playerX - 1][playerY] === 0) { playerXcanUp = true }
+  else { playerXcanUp = false };
+  if (playerX < arrays.smallMap.length - 2 && arrays.smallMap[playerX + 1][playerY] === 0) { playerXcanDown = true }
+  else { playerXcanDown = false };
+  if (playerY > 1 && arrays.smallMap[playerX][playerY - 1] === 0) { playerXcanLeft = true }
+  else { playerXcanLeft = false };
+  if (playerY < arrays.smallMap[0].length - 2 && arrays.smallMap[playerX][playerY + 1] === 0) { playerXcanRight = true }
+  else { playerXcanRight = false };
+
+  let playerYcanUp;
+  let playerYcanDown;
+  let playerYcanRight;
+  let playerYcanLeft;
+
+  if (player2X > 1 && arrays.smallMap[player2X - 1][player2Y] === 0) { playerYcanUp = true }
+  else { playerYcanUp = false };
+  if (player2X < arrays.smallMap.length - 2 && arrays.smallMap[player2X + 1][player2Y] === 0) { playerYcanDown = true }
+  else { playerYcanDown = false };
+  if (player2Y > 1 && arrays.smallMap[player2X][player2Y - 1] === 0) { playerYcanLeft = true }
+  else { playerYcanLeft = false };
+  if (player2Y < arrays.smallMap[0].length - 2 && arrays.smallMap[player2X][player2Y + 1] === 0) { playerYcanRight = true }
+  else { playerYcanRight = false };
+
+  let playerXpositionValue = arrays.smallMap[playerX][playerY];
+  let playerYpositionValue = arrays.smallMap[player2X][player2Y];
+
   if (key === 'q') {
     process.exit(0);
   }
-  // If it's a bomb (9 is bomb) at player's position, then it remain a bomb, and the player move up, if there is a free space.
-  if (key === 'w' && playerX > 1 && arrays.smallMap[playerX - 1][playerY] === 0 && arrays.smallMap[playerX][playerY] === 9) {
-    arrays.smallMap[playerX][playerY] = 9;
-    playerX--;
-    arrays.smallMap[playerX][playerY] = 'X';
-  } else {
-    // If there isn't a bomb (9 is bomb) at player's position and there is a free space, the player move up,
-    if (key === 'w' && playerX > 1 && arrays.smallMap[playerX - 1][playerY] === 0 && arrays.smallMap[playerX][playerY] !== 9) {
-      arrays.smallMap[playerX][playerY] = 0;
-      playerX--;
-      arrays.smallMap[playerX][playerY] = 'X';
+  if (key === 'w' && playerXcanUp === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerX--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerX--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === 's' && playerX < arrays.smallMap.length - 2 && arrays.smallMap[playerX + 1][playerY] === 0 && arrays.smallMap[playerX][playerY] === 9) {
-    arrays.smallMap[playerX][playerY] = 9;
-    playerX++;
-    arrays.smallMap[playerX][playerY] = 'X';
-  } else {
-    if (key === 's' && playerX < arrays.smallMap.length - 2 && arrays.smallMap[playerX + 1][playerY] === 0 && arrays.smallMap[playerX][playerY] !== 9) {
-      arrays.smallMap[playerX][playerY] = 0;
-      playerX++;
-      arrays.smallMap[playerX][playerY] = 'X';
+  if (key === 's' && playerXcanDown === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerX++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerX++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === 'a' && playerY > 1 && arrays.smallMap[playerX][playerY - 1] === 0 && arrays.smallMap[playerX][playerY] === 9) {
-    arrays.smallMap[playerX][playerY] = 9;
-    playerY--;
-    arrays.smallMap[playerX][playerY] = 'X';
-  } else {
-    if (key === 'a' && playerY > 1 && arrays.smallMap[playerX][playerY - 1] === 0 && arrays.smallMap[playerX][playerY] !== 9) {
-      arrays.smallMap[playerX][playerY] = 0;
-      playerY--;
-      arrays.smallMap[playerX][playerY] = 'X';
+  if (key === 'a' && playerXcanLeft === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerY--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerY--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === 'd' && playerY < arrays.smallMap[0].length - 2 && arrays.smallMap[playerX][playerY + 1] === 0 && arrays.smallMap[playerX][playerY] === 9) {
-    arrays.smallMap[playerX][playerY] = 9;
-    playerY++;
-    arrays.smallMap[playerX][playerY] = 'X';
-  } else {
-    if (key === 'd' && playerY < arrays.smallMap[0].length - 2 && arrays.smallMap[playerX][playerY + 1] === 0 && arrays.smallMap[playerX][playerY] !== 9) {
-      arrays.smallMap[playerX][playerY] = 0;
-      playerY++;
-      arrays.smallMap[playerX][playerY] = 'X';
+  if (key === 'd' && playerXcanRight === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerY++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerY++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === '8' && player2X > 1 && arrays.smallMap[player2X - 1][player2Y] === 0 && arrays.smallMap[player2X][player2Y] === 8) {
-    arrays.smallMap[player2X][player2Y] = 8;
-    player2X--;
-    arrays.smallMap[player2X][player2Y] = 'Y';
-  } else {
-    if (key === '8' && player2X > 1 && arrays.smallMap[player2X - 1][player2Y] === 0 && arrays.smallMap[player2X][player2Y] !== 8) {
-      arrays.smallMap[player2X][player2Y] = 0;
-      player2X--;
-      arrays.smallMap[player2X][player2Y] = 'Y';
+  if (key === '8' && playerYcanUp === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2X--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2X--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  if (key === '5' && player2X < arrays.smallMap.length - 2 && arrays.smallMap[player2X + 1][player2Y] === 0 && arrays.smallMap[player2X][player2Y] === 8) {
-    arrays.smallMap[player2X][player2Y] = 8;
-    player2X++;
-    arrays.smallMap[player2X][player2Y] = 'Y';
-  } else {
-    if (key === '5' && player2X < arrays.smallMap.length - 2 && arrays.smallMap[player2X + 1][player2Y] === 0 && arrays.smallMap[player2X][player2Y] !== 8) {
-      arrays.smallMap[player2X][player2Y] = 0;
-      player2X++;
-      arrays.smallMap[player2X][player2Y] = 'Y';
+  if (key === '5' && playerYcanDown === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2X++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2X++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  if (key === '4' && player2Y > 1 && arrays.smallMap[player2X][player2Y - 1] === 0 && arrays.smallMap[player2X][player2Y] === 8) {
-    arrays.smallMap[player2X][player2Y] = 8;
-    player2Y--;
-    arrays.smallMap[player2X][player2Y] = 'Y';
-  } else {
-    if (key === '4' && player2Y > 1 && arrays.smallMap[player2X][player2Y - 1] === 0 && arrays.smallMap[player2X][player2Y] !== 8) {
-      arrays.smallMap[player2X][player2Y] = 0;
-      player2Y--;
-      arrays.smallMap[player2X][player2Y] = 'Y';
+  if (key === '4' && playerYcanLeft === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2Y--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2Y--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  if (key === '6' && player2Y < arrays.smallMap[0].length - 2 && arrays.smallMap[player2X][player2Y + 1] === 0 && arrays.smallMap[player2X][player2Y] === 8) {
-    arrays.smallMap[player2X][player2Y] = 8;
-    player2Y++;
-    arrays.smallMap[player2X][player2Y] = 'Y';
-  } else {
-    if (key === '6' && player2Y < arrays.smallMap[0].length - 2 && arrays.smallMap[player2X][player2Y + 1] === 0 && arrays.smallMap[player2X][player2Y] !== 8) {
-      arrays.smallMap[player2X][player2Y] = 0;
-      player2Y++;
-      arrays.smallMap[player2X][player2Y] = 'Y';
+  if (key === '6' && playerYcanRight === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2Y++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2Y++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  // If 'f' key pressed, then player 1 plant a bomb.
   if (key === 'f') {
     placeBombPlayer1();
   }
-  // If '0' key pressed, then player 2 plant a bomb.
   if (key === '0') {
     placeBombPlayer2();
   }
@@ -124,7 +176,7 @@ arrays.smallMap = common.generatedMap(arrays.smallMap);
 let board = common.largeMapGen(arrays.smallMap);
 
 let i = 1;
-setTimeout(function run () {
+setTimeout(function run() {
   common.print(common.largeMapGen(arrays.smallMap));
   i++;
   setTimeout(run, 100);
@@ -138,7 +190,6 @@ let bomb2 = 8;
 let player1bomb = 100;
 let player2bomb = 100;
 
-// This function remove the explosion from the map.
 const removeExplosion = () => {
   for (let i = 0; i < arrays.smallMap.length; i++) {
     for (let j = 0; j < arrays.smallMap[i].length; j++) {
@@ -179,3 +230,4 @@ const placeBombPlayer2 = () => {
     setTimeout(removeExplosion2, 4000);
   }
 };
+

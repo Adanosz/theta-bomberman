@@ -89,12 +89,12 @@ const keyProcessor = (key) => {
     if (key === 'q') {
       common.print(menuFunc());
     }
+
   }
 };
 
 stdin.on('data', keyProcessor);
 let blindset;
-let ind = 0;
 
 let position1 = 13;
 let position2 = 60;

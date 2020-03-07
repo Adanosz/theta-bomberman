@@ -1,4 +1,5 @@
 const arrays = require('./arrays.js');
+
 const print = (printable) => {
   // print an array as string, per line
   // used everywhere
@@ -62,13 +63,7 @@ const largeMapGen = (smallMap) => {
   for (let i = 0; i < board.length; i++) {
     board[i] = new Array(200);
   }
-
-  // elements
-  const freeSpace = ['░'];
-  const softWall = ['█'];
-  const fixWall = ['▓'];
-  const border = ['▚'];
-
+  // elements kiszervezve arrays-be / 16-81 sor
   // convert smallMap indexes into 8x4 array
   let position1 = 0;
   let position2 = 0;
@@ -77,43 +72,43 @@ const largeMapGen = (smallMap) => {
       const largeMapGenAssistant = (type) => {
         for (let i = 0; i < 4; i++) {
           for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = type;
+            board[a + i][b + j] = type[i][j];
           }
         }
       }
       switch (smallMap[i][j]) {
         case 0:
-          largeMapGenAssistant(freeSpace[0]);
+          largeMapGenAssistant(arrays.freeSpace);
           break;
         case 1:
-          largeMapGenAssistant(softWall[0]);
+          largeMapGenAssistant(arrays.softWall);
           break;
         case 2:
-          largeMapGenAssistant(border[0]);
+          largeMapGenAssistant(arrays.border);
           break;
         case 3:
-          largeMapGenAssistant(fixWall[0]);
+          largeMapGenAssistant(arrays.fixWall);
           break;
         case 5:
-          largeMapGenAssistant(5);
+          largeMapGenAssistant(arrays.randomFiveStuff);
           break;
         case 'X':
-          largeMapGenAssistant('X');
+          largeMapGenAssistant(arrays.playerXDesign);
           break;
         case 'Y':
-          largeMapGenAssistant('Y');
+          largeMapGenAssistant(arrays.playerYDesign);
           break;
         case '*':
-          largeMapGenAssistant('*');
+          largeMapGenAssistant(arrays.playerXExplode);
           break;
         case 9:
-          largeMapGenAssistant(9);
+          largeMapGenAssistant(arrays.playerXbombDesign);
           break;
         case '#':
-          largeMapGenAssistant('#');
+          largeMapGenAssistant(arrays.playerYExplode);
           break;
         case 8:
-          largeMapGenAssistant(8);
+          largeMapGenAssistant(arrays.playerYbombDesign);
       }
     }
   }
