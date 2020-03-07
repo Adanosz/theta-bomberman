@@ -238,7 +238,7 @@ const optionsFunc = () => {
 }
 
 const creditsFunc = () => {
-  let stopInterval = setInterval(() => { common.print(credistFuncInner()) }, 150);
+  let stopInterval = setInterval(() => { common.print(credistFuncInner()) }, 250);
   const credistFuncInner = () => {
     menuArr.splice(0, 1);
     menuArr.push(arrays.creatorsArr[0]);
