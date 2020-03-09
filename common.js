@@ -9,92 +9,24 @@ const print = (printable) => {
   }
 };
 let smallMap = arrays.smallMap;
-/* 
-const PRESENT_FirePower = 4;
-const PRESENT_PlusBomb = 5;
-const PRESENT_PushTheBomb = 6;
-const PRESENT_ExtraLife = 7;
 
-const PRESENTS = [PRESENT_FirePower, PRESENT_PlusBomb, PRESENT_PushTheBomb, PRESENT_ExtraLife];
-const getRandomPresent = () => {
-  return PRESENTS[getRandomInt(0, PRESENTS.length-1)];
-};
-
-const scanMap = (smallMap) => {
-  let smallClone = smallMap;
-  for (let i = 0; i < smallMap.length; i++) {
-    for (let j = 0; j < smallMap[i].length; j++) {
-      if (smallMap[i][j] !== 1) {
-        smallClone[i][j] = 'a';
-      } else {
-        if (!present30PercentShouldBePut()) {
-          smallClone[i][j] = 'a';
-        }
-      }
-    }
-  }
-  return smallClone;
-};
-
-const isPresent = (smallClone, i, j) => {
-  if (smallClone[i][j] === 1) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const present30PercentShouldBePut = () => {
-  if (getRandomInt(1, 4) === 3) {
-    return true;
-  }
-  return false;
-};
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
- */
 let explodeRange = 1;
 const explode1 = () => {
-  /* let smallClone = scanMap(smallMap);
-  console.log(smallClone); */
   // This function is for the bomb explosion. If there is a destructible object next to a bomb,
   // then it will be vanish.
   for (let i = 0; i < smallMap.length; i++) {
     for (let j = 0; j < smallMap[i].length; j++) {
       if (smallMap[i][j] === 9 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
-        smallMap[i + explodeRange][j] = '*'; // TODO exploderange won't work like this
-        /* if (isPresent(smallClone, i, j)) {
-          smallMap[i][j] = getRandomPresent();
-        } else { 
-          smallMap[i + 1][j] = '*';
-        } */
+        smallMap[i + explodeRange][j] = '*';
       }
       if (smallMap[i][j] === 9 && (smallMap[i - 1][j] === 1 || smallMap[i - 1][j] === 0 || smallMap[i - 1][j] === 'X' || smallMap[i - 1][j] === 'Y')) {
         smallMap[i - explodeRange][j] = '*';
-        /* if (isPresent(smallClone, i, j)) {
-          smallMap[i][j] = getRandomPresent();
-        } else {
-          smallMap[i - 1][j] = '*';
-        } */
       }
       if (smallMap[i][j] === 9 && (smallMap[i][j + 1] === 1 || smallMap[i][j + 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j + 1] === 'Y')) {
         smallMap[i][j + explodeRange] = '*';
-        /* if (isPresent(smallClone, i, j)) {
-          smallMap[i][j] = getRandomPresent();
-        } else {
-          smallMap[i][j + 1] = '*';
-        } */
       }
       if (smallMap[i][j] === 9 && (smallMap[i][j - 1] === 1 || smallMap[i][j - 1] === 0 || smallMap[i][j - 1] === 'X' || smallMap[i][j - 1] === 'Y')) {
         smallMap[i][j - explodeRange] = '*';
-        /* if (isPresent(smallClone, i, j)) {
-          smallMap[i][j] = getRandomPresent();
-        } else {
-          smallMap[i][j - 1] = '*';
-        } */
       }
       if (smallMap[i][j] === 9) {
         smallMap[i][j] = '*';
@@ -144,89 +76,6 @@ const largeMapGen = (smallMap) => {
           }
         }
       }
-      if (smallMap[i][j] === 3) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = fixWall[0];
-          }
-        }
-      }
-      /* if (smallMap[i][j] === 5) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 5;
-          }
-        }
-      } */
-      if (smallMap[i][j] === 'X') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'X';
-          }
-        }
-      }
-      if (smallMap[i][j] === 'Y') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'Y';
-          }
-        }
-      }
-      if (smallMap[i][j] === '*') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = '*';
-          }
-        }
-      }
-      if (smallMap[i][j] === 9) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 9;
-          }
-        }
-      }
-      if (smallMap[i][j] === '#') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = '#';
-          }
-        }
-      }
-      if (smallMap[i][j] === 4) { // FirePower booster
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 4;
-          }
-        }
-      }
-      if (smallMap[i][j] === 5) { // PlusBomb booster
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 5;
-          }
-        }
-      }
-      if (smallMap[i][j] === 6) { // PushTheBomb booster
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 6;
-          }
-        }
-      }
-      if (smallMap[i][j] === 7) { // ExtraLife booster
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 7;
-          }
-        }
-      }
-      if (smallMap[i][j] === 8) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 8;
-          }
-        }
       switch (smallMap[i][j]) {
         case 0:
           largeMapGenAssistant(arrays.freeSpace);
@@ -240,8 +89,17 @@ const largeMapGen = (smallMap) => {
         case 3:
           largeMapGenAssistant(arrays.fixWall);
           break;
+        case 4:
+          largeMapGenAssistant(arrays.PRESENT_FirePower);
+          break;
         case 5:
-          largeMapGenAssistant(arrays.randomFiveStuff);
+          largeMapGenAssistant(arrays.PRESENT_PlusBomb);
+          break;
+        case 6:
+          largeMapGenAssistant(arrays.PRESENT_PushTheBomb);
+          break;
+        case 7:
+          largeMapGenAssistant(arrays.PRESENT_ExtraLife);
           break;
         case 'X':
           largeMapGenAssistant(arrays.playerXDesign);
@@ -345,6 +203,47 @@ const clearArr = (arr) => {
   }
 };
 
+const PRESENT_FirePower = 4;
+const PRESENT_PlusBomb = 5;
+const PRESENT_PushTheBomb = 6;
+const PRESENT_ExtraLife = 7;
+
+const PRESENTS = [PRESENT_FirePower, PRESENT_PlusBomb, PRESENT_PushTheBomb, PRESENT_ExtraLife];
+
+const getRandomPresent = () => {
+  return PRESENTS[getRandomInt(0, PRESENTS.length - 1)];
+};
+
+const isPresent = (smallmap, i, j) => {
+  if (smallmap[i][j] === 1) {
+    return true;
+  } else {
+    return false;
+  }
+};
+  
+const present30PercentShouldBePut = () => {
+  if (getRandomInt(1, 4) === 3) {
+    return true;
+  }
+  return false;
+};
+
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const findWallInMap = (map) => {
+  let foundWall = [];
+  for (let i = 0; i < smallMap.length; i++) {
+    for (let j = 0; j < smallMap[i].length; j++) {
+      if ()
+    }
+  }
+}
+
 module.exports = {
   print,
   largeMapGen,
@@ -354,5 +253,8 @@ module.exports = {
   menuSelectionDel,
   clearArr,
   explode1,
-  explode2
+  explode2,
+  isPresent,
+  present30PercentShouldBePut,
+  getRandomInt
 };
