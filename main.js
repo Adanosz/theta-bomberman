@@ -1,4 +1,6 @@
 const common = require('./common.js');
+const arrays = require('./arrays.js');
+
 
 const stdin = process.stdin;
 stdin.setRawMode(true);
@@ -14,150 +16,168 @@ let player2Y = 23;
 
 // If 'q' is pressed, exit the program.
 const keyProcessor = (key) => {
+
+  let playerXcanUp;
+  let playerXcanDown;
+  let playerXcanRight;
+  let playerXcanLeft;
+
+  if (playerX > 1 && arrays.smallMap[playerX - 1][playerY] === 0) { playerXcanUp = true }
+  else { playerXcanUp = false };
+  if (playerX < arrays.smallMap.length - 2 && arrays.smallMap[playerX + 1][playerY] === 0) { playerXcanDown = true }
+  else { playerXcanDown = false };
+  if (playerY > 1 && arrays.smallMap[playerX][playerY - 1] === 0) { playerXcanLeft = true }
+  else { playerXcanLeft = false };
+  if (playerY < arrays.smallMap[0].length - 2 && arrays.smallMap[playerX][playerY + 1] === 0) { playerXcanRight = true }
+  else { playerXcanRight = false };
+
+  let playerYcanUp;
+  let playerYcanDown;
+  let playerYcanRight;
+  let playerYcanLeft;
+
+  if (player2X > 1 && arrays.smallMap[player2X - 1][player2Y] === 0) { playerYcanUp = true }
+  else { playerYcanUp = false };
+  if (player2X < arrays.smallMap.length - 2 && arrays.smallMap[player2X + 1][player2Y] === 0) { playerYcanDown = true }
+  else { playerYcanDown = false };
+  if (player2Y > 1 && arrays.smallMap[player2X][player2Y - 1] === 0) { playerYcanLeft = true }
+  else { playerYcanLeft = false };
+  if (player2Y < arrays.smallMap[0].length - 2 && arrays.smallMap[player2X][player2Y + 1] === 0) { playerYcanRight = true }
+  else { playerYcanRight = false };
+
+  let playerXpositionValue = arrays.smallMap[playerX][playerY];
+  let playerYpositionValue = arrays.smallMap[player2X][player2Y];
+
   if (key === 'q') {
     process.exit(0);
   }
-  // If it's a bomb (9 is bomb) at player's position, then it remain a bomb, and the player move up, if there is a free space.
-  if (key === '\u0077' && playerX > 1 && smallMap[playerX - 1][playerY] === 0 && 
-  smallMap[playerX][playerY] === 9) {
-    // console.clear();
-    smallMap[playerX][playerY] = 9;
-    playerX--;
-    smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    // If there isn't a bomb (9 is bomb) at player's position and there is a free space, the player move up,
-    if (key === '\u0077' && playerX > 1 && smallMap[playerX - 1][playerY] === 0 && smallMap[playerX][playerY] !== 9) {
-    // console.clear();
-      smallMap[playerX][playerY] = 0;
-      playerX--;
-      smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
+  if (key === 'w' && playerXcanUp === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerX--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerX--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === '\u0073' && playerX < smallMap.length - 2 && smallMap[playerX + 1][playerY] === 0 && smallMap[playerX][playerY] === 9) {
-    // console.clear();
-    smallMap[playerX][playerY] = 9;
-    playerX++;
-    smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    if (key === '\u0073' && playerX < smallMap.length - 2 && smallMap[playerX + 1][playerY] === 0 && smallMap[playerX][playerY] !== 9) {
-      // console.clear();
-      smallMap[playerX][playerY] = 0;
-      playerX++;
-      smallMap[playerX][playerY] = 'X';
-      // common.print(common.largeMapGen(smallMap));
+  if (key === 's' && playerXcanDown === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerX++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerX++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === '\u0061' && playerY > 1 && smallMap[playerX][playerY - 1] === 0 && smallMap[playerX][playerY] === 9) {
-    // console.clear();
-    smallMap[playerX][playerY] = 9;
-    playerY--;
-    smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    if (key === '\u0061' && playerY > 1 && smallMap[playerX][playerY - 1] === 0 && smallMap[playerX][playerY] !== 9) {
-      // console.clear();
-      smallMap[playerX][playerY] = 0;
-      playerY--;
-      smallMap[playerX][playerY] = 'X';
-      // common.print(common.largeMapGen(smallMap));
+  if (key === 'a' && playerXcanLeft === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerY--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerY--;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === '\u0064' && playerY < smallMap[0].length - 2 && smallMap[playerX][playerY + 1] === 0 && smallMap[playerX][playerY] === 9) {
-    // console.clear();
-    smallMap[playerX][playerY] = 9;
-    playerY++;
-    smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    if (key === '\u0064' && playerY < smallMap[0].length - 2 && smallMap[playerX][playerY + 1] === 0 && smallMap[playerX][playerY] !== 9) {
-      // console.clear();
-      smallMap[playerX][playerY] = 0;
-      playerY++;
-      smallMap[playerX][playerY] = 'X';
-      // common.print(common.largeMapGen(smallMap));
+  if (key === 'd' && playerXcanRight === true) {
+    switch (playerXpositionValue === 9) {
+      case true:
+        arrays.smallMap[playerX][playerY] = 9;
+        playerY++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
+      case false:
+        arrays.smallMap[playerX][playerY] = 0;
+        playerY++;
+        arrays.smallMap[playerX][playerY] = 'X';
+        break;
     }
   }
-  if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] === 9) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 9;
-    player2X--;
-    smallMap[player2X][player2Y] = 'Y';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 9) {
-      // console.clear();
-      smallMap[player2X][player2Y] = 0;
-      player2X--;
-      smallMap[player2X][player2Y] = 'Y';
-      // common.print(common.largeMapGen(smallMap));
+  if (key === '8' && playerYcanUp === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2X--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2X--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] === 9) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 9;
-    player2X++;
-    smallMap[player2X][player2Y] = 'Y';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 9) {
-      // console.clear();
-      smallMap[player2X][player2Y] = 0;
-      player2X++;
-      smallMap[player2X][player2Y] = 'Y';
-      // common.print(common.largeMapGen(smallMap));
+  if (key === '5' && playerYcanDown === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2X++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2X++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] === 9) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 9;
-    player2Y--;
-    smallMap[player2X][player2Y] = 'Y';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] !== 9) {
-      // console.clear();
-      smallMap[player2X][player2Y] = 0;
-      player2Y--;
-      smallMap[player2X][player2Y] = 'Y';
-      // common.print(common.largeMapGen(smallMap));
+  if (key === '4' && playerYcanLeft === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2Y--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2Y--;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] === 9) {
-    // console.clear();
-    smallMap[player2X][player2Y] = 9;
-    player2Y++;
-    smallMap[player2X][player2Y] = 'Y';
-    // common.print(common.largeMapGen(smallMap));
-  } else {
-    if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] !== 9) {
-      // console.clear();
-      smallMap[player2X][player2Y] = 0;
-      player2Y++;
-      smallMap[player2X][player2Y] = 'Y';
-      // common.print(common.largeMapGen(smallMap));
+  if (key === '6' && playerYcanRight === true) {
+    switch (playerYpositionValue === 8) {
+      case true:
+        arrays.smallMap[player2X][player2Y] = 8;
+        player2Y++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
+      case false:
+        arrays.smallMap[player2X][player2Y] = 0;
+        player2Y++;
+        arrays.smallMap[player2X][player2Y] = 'Y';
+        break;
     }
   }
-  // If 'f' key pressed, then player 1 plant a bomb.
   if (key === 'f') {
     placeBombPlayer1();
   }
-  // If '0' key pressed, then player 2 plant a bomb.
-  if (key === '\u0030') {
+  if (key === '0') {
     placeBombPlayer2();
   }
 };
 stdin.on('data', keyProcessor);
-let smallMap = common.smallMap;
-smallMap = common.generatedMap(smallMap);
-let board = common.largeMapGen(smallMap);
+let smallMap = arrays.smallMap;
+arrays.smallMap = common.generatedMap(arrays.smallMap);
+let board = common.largeMapGen(arrays.smallMap);
 
 let i = 1;
-setTimeout(function run () {
-  // common.print(common.largeMapGen(smallMap));
-  common.print(common.smallMap);
+setTimeout(function run() {
+  common.print(common.largeMapGen(arrays.smallMap));
   i++;
   console.log();
   setTimeout(run, 100);
@@ -171,22 +191,21 @@ let bomb2 = 8;
 let player1bomb = 100;
 let player2bomb = 100;
 
-// This function remove the explosion from the map.
 const removeExplosion = () => {
-  for (let i = 0; i < smallMap.length; i++) {
-    for (let j = 0; j < smallMap[i].length; j++) {
-      if (smallMap[i][j] === '*') {
-        smallMap[i][j] = 0;
+  for (let i = 0; i < arrays.smallMap.length; i++) {
+    for (let j = 0; j < arrays.smallMap[i].length; j++) {
+      if (arrays.smallMap[i][j] === '*') {
+        arrays.smallMap[i][j] = 0;
       }
     }
   }
 };
 
 const removeExplosion2 = () => {
-  for (let i = 0; i < smallMap.length; i++) {
-    for (let j = 0; j < smallMap[i].length; j++) {
-      if (smallMap[i][j] === '#') {
-        smallMap[i][j] = 0;
+  for (let i = 0; i < arrays.smallMap.length; i++) {
+    for (let j = 0; j < arrays.smallMap[i].length; j++) {
+      if (arrays.smallMap[i][j] === '#') {
+        arrays.smallMap[i][j] = 0;
       }
     }
   }
@@ -195,7 +214,7 @@ const removeExplosion2 = () => {
 // Plant a bomb at player 1 position, then activate the countdown function.
 const placeBombPlayer1 = () => {
   if (player1bomb > 0) {
-    smallMap[playerX][playerY] = bomb1;
+    arrays.smallMap[playerX][playerY] = bomb1;
     player1bomb--;
     setTimeout(common.explode1, 2500);
     setTimeout(removeExplosion, 4000);
@@ -205,7 +224,7 @@ const placeBombPlayer1 = () => {
 // Plant a bomb at player 2 position, then activate the countdown function.
 const placeBombPlayer2 = () => {
   if (player2bomb > 0) {
-    smallMap[player2X][player2Y] = bomb2;
+    arrays.smallMap[player2X][player2Y] = bomb2;
     player2bomb--;
     setTimeout(common.explode2, 2500);
     setTimeout(removeExplosion2, 4000);
