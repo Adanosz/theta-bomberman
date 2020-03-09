@@ -304,13 +304,16 @@ const keyProcessor = (key) => {
     let playerXcanRight;
     let playerXcanLeft;
 
-    if (playerX > 1 && arrays.smallMap[playerX - 1][playerY] === 0) { playerXcanUp = true }
+    // Where a player can go
+    const arr = ['*', '#', 0, 4, 5, 6, 7];
+
+    if (playerX > 1 && (arr.includes(arrays.smallMap[playerX - 1][playerY]) === true)) { playerXcanUp = true }
     else { playerXcanUp = false };
-    if (playerX < arrays.smallMap.length - 2 && arrays.smallMap[playerX + 1][playerY] === 0) { playerXcanDown = true }
+    if (playerX < arrays.smallMap.length - 2 && (arr.includes(arrays.smallMap[playerX + 1][playerY]) === true)) { playerXcanDown = true }
     else { playerXcanDown = false };
-    if (playerY > 1 && arrays.smallMap[playerX][playerY - 1] === 0) { playerXcanLeft = true }
+    if (playerY > 1 && (arr.includes(arrays.smallMap[playerX][playerY - 1]) === true)) { playerXcanLeft = true }
     else { playerXcanLeft = false };
-    if (playerY < arrays.smallMap[0].length - 2 && arrays.smallMap[playerX][playerY + 1] === 0) { playerXcanRight = true }
+    if (playerY < arrays.smallMap[0].length - 2 && (arr.includes(arrays.smallMap[playerX][playerY + 1]) === true)) { playerXcanRight = true }
     else { playerXcanRight = false };
 
     let playerYcanUp;
@@ -318,13 +321,13 @@ const keyProcessor = (key) => {
     let playerYcanRight;
     let playerYcanLeft;
 
-    if (player2X > 1 && arrays.smallMap[player2X - 1][player2Y] === 0) { playerYcanUp = true }
+    if (player2X > 1 && (arr.includes(arrays.smallMap[player2X - 1][player2Y]) === true)) { playerYcanUp = true }
     else { playerYcanUp = false };
-    if (player2X < arrays.smallMap.length - 2 && arrays.smallMap[player2X + 1][player2Y] === 0) { playerYcanDown = true }
+    if (player2X < arrays.smallMap.length - 2 && (arr.includes(arrays.smallMap[player2X + 1][player2Y]) === true)) { playerYcanDown = true }
     else { playerYcanDown = false };
-    if (player2Y > 1 && arrays.smallMap[player2X][player2Y - 1] === 0) { playerYcanLeft = true }
+    if (player2Y > 1 && (arr.includes(arrays.smallMap[player2X][player2Y - 1]) === true)) { playerYcanLeft = true }
     else { playerYcanLeft = false };
-    if (player2Y < arrays.smallMap[0].length - 2 && arrays.smallMap[player2X][player2Y + 1] === 0) { playerYcanRight = true }
+    if (player2Y < arrays.smallMap[0].length - 2 && (arr.includes(arrays.smallMap[player2X][player2Y + 1]) === true)) { playerYcanRight = true }
     else { playerYcanRight = false };
 
     let playerXpositionValue = arrays.smallMap[playerX][playerY];
@@ -333,16 +336,16 @@ const keyProcessor = (key) => {
     if (key === 'q') {
       console.clear();
       print(menuFunc());
-
     }
     if (key === 'w' && playerXcanUp === true) {
-      switch (playerXpositionValue === 9) {
-        case true:
+      switch (arrays.smallMap[playerX][playerY]) {
+        case (9):
           arrays.smallMap[playerX][playerY] = 9;
           playerX--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case false:
+        case ('X'):
+          arrays.smallMap[playerX][playerY] = 'X';
           arrays.smallMap[playerX][playerY] = 0;
           playerX--;
           arrays.smallMap[playerX][playerY] = 'X';
@@ -350,13 +353,14 @@ const keyProcessor = (key) => {
       }
     }
     if (key === 's' && playerXcanDown === true) {
-      switch (playerXpositionValue === 9) {
-        case true:
+      switch (playerXpositionValue) {
+        case 9:
           arrays.smallMap[playerX][playerY] = 9;
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case false:
+        case 'X':
+          arrays.smallMap[playerX][playerY] = 'X';
           arrays.smallMap[playerX][playerY] = 0;
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
@@ -364,13 +368,14 @@ const keyProcessor = (key) => {
       }
     }
     if (key === 'a' && playerXcanLeft === true) {
-      switch (playerXpositionValue === 9) {
-        case true:
+      switch (playerXpositionValue) {
+        case 9:
           arrays.smallMap[playerX][playerY] = 9;
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case false:
+        case 'X':
+          arrays.smallMap[playerX][playerY] = 'X';
           arrays.smallMap[playerX][playerY] = 0;
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
@@ -378,13 +383,14 @@ const keyProcessor = (key) => {
       }
     }
     if (key === 'd' && playerXcanRight === true) {
-      switch (playerXpositionValue === 9) {
-        case true:
+      switch (playerXpositionValue) {
+        case 9:
           arrays.smallMap[playerX][playerY] = 9;
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case false:
+        case 'X':
+          arrays.smallMap[playerX][playerY] = 'X';
           arrays.smallMap[playerX][playerY] = 0;
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
