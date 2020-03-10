@@ -10,6 +10,25 @@ const print = (printable) => {
 };
 let smallMap = arrays.smallMap;
 
+let player1 = {
+  life: 1,
+  bombs: 5,
+  pushAbility: false
+};
+let player2 = {
+  life: 1,
+  bombs: 5,
+  pushAbility: false
+};
+
+let player1bomb = {
+  firepower: 1
+};
+let player2bomb = {
+  firepower: 1
+};
+
+
 let explodeRange = 1;
 const explode1 = () => {
   // This function is for the bomb explosion. If there is a destructible object next to a bomb,
@@ -212,8 +231,6 @@ let playerY = 1;
 let player2X = 11;
 let player2Y = 23;
 
-let player1bomb = 100;
-let player2bomb = 100;
 let bomb1 = 9;
 let bomb2 = 8;
 let blindset;
@@ -482,18 +499,18 @@ const removeExplosion2 = () => {
 };
 
 const placeBombPlayer1 = () => {
-  if (player1bomb > 0) {
+  if (player1.bombs > 0) {
     arrays.smallMap[playerX][playerY] = bomb1;
-    player1bomb--;
+    player1.bombs--;
     setTimeout(explode1, 2500);
     setTimeout(removeExplosion, 4000);
   }
 };
 
 const placeBombPlayer2 = () => {
-  if (player2bomb > 0) {
+  if (player2.bombs > 0) {
     arrays.smallMap[player2X][player2Y] = bomb2;
-    player2bomb--;
+    player2.bombs--;
     setTimeout(explode2, 2500);
     setTimeout(removeExplosion2, 4000);
   }
