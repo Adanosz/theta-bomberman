@@ -6,9 +6,9 @@ const print = (printable) => {
 
 let smallMap = [
   [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-  [2, 'X', 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+  [2, 'X', 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 'C', 2],
+  [2, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 2],
+  [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2],
   [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
   [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
   [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
@@ -64,6 +64,30 @@ const explode2 = () => {
     }
   }
 };
+
+const explode3 = () => {
+  for (let i = 0; i < smallMap.length; i++) {
+    for (let j = 0; j < smallMap[i].length; j++) {
+      if (smallMap[i][j] === 'B' && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
+        smallMap[i + explodeRange][j] = '+';
+      }
+      if (smallMap[i][j] === 'B' && (smallMap[i - 1][j] === 1 || smallMap[i - 1][j] === 0 || smallMap[i - 1][j] === 'X' || smallMap[i - 1][j] === 'Y')) {
+        smallMap[i - explodeRange][j] = '+';
+      }
+      if (smallMap[i][j] === 'B' && (smallMap[i][j + 1] === 1 || smallMap[i][j + 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j + 1] === 'Y')) {
+        smallMap[i][j + explodeRange] = '+';
+      }
+      if (smallMap[i][j] === 'B' && (smallMap[i][j - 1] === 1 || smallMap[i][j - 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j - 1] === 'Y')) {
+        smallMap[i][j - explodeRange] = '+';
+      }
+      if (smallMap[i][j] === 'B') {
+        smallMap[i][j] = '+';
+      }
+    }
+  }
+};
+
+
 
 const largeMapGen = (smallMap) => {
   // make a 200x52 array, will be spliced to 176x44
@@ -160,6 +184,27 @@ const largeMapGen = (smallMap) => {
           }
         }
       }
+      if (smallMap[i][j] === 'C') {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 8; j++) {
+            board[a + i][b + j] = 'C';
+          }
+        }
+      }
+      if (smallMap[i][j] === 'B') {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 8; j++) {
+            board[a + i][b + j] = 'B';
+          }
+        }
+      }
+      if (smallMap[i][j] === '+') {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 8; j++) {
+            board[a + i][b + j] = '+';
+          }
+        }
+      }
     }
   }
 
@@ -199,5 +244,6 @@ module.exports = {
   generatedMap,
   explode1,
   explode2,
+  explode3,
   smallMap
 };
