@@ -69,8 +69,8 @@ const largeMapGen = (smallMap) => {
   // convert smallMap indexes into 8x4 array
   let position1 = 0;
   let position2 = 0;
-  for (let i = 0, a = position1; i < smallMap.length; i++ , a += 4) {
-    for (let j = 0, b = position2; j < smallMap[i].length; j++ , b += 8) {
+  for (let i = 0, a = position1; i < smallMap.length; i++, a += 4) {
+    for (let j = 0, b = position2; j < smallMap[i].length; j++, b += 8) {
       const largeMapGenAssistant = (type) => {
         for (let i = 0; i < 4; i++) {
           for (let j = 0; j < 8; j++) {
@@ -128,7 +128,7 @@ const largeMapGen = (smallMap) => {
   board.splice(0, 3);
   board.splice(-4, 3);
   for (let i = 0; i < 6; i++) {
-    for (let i = 0, j = 0; i < board.length; i++ , j++) {
+    for (let i = 0, j = 0; i < board.length; i++, j++) {
       board[i].pop();
       board[j].shift();
     }
@@ -167,13 +167,13 @@ let menuArr = menuArrGen();
 const menuSelectionMove = () => { // leftArrow, rightArrow
   // moves the selections arrays
   // used in menu after menuSelectionDel
-  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++ , k++) {
-    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++ , m++) {
+  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++, k++) {
+    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++, m++) {
       menuArr[i][j] = arrays.arrowLeft[k][m];
     }
   }
-  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++ , k++) {
-    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++ , m++) {
+  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++, k++) {
+    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++, m++) {
       menuArr[i][j] = arrays.arrowRight[k][m];
     }
   }
@@ -183,13 +183,13 @@ let position2 = 60;
 const menuSelectionDel = () => {
   // clears the selection arrows
   // used in menu after moving selection
-  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++ , k++) {
-    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++ , m++) {
+  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++, k++) {
+    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++, m++) {
       menuArr[i][j] = ' ';
     }
   }
-  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++ , k++) {
-    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++ , m++) {
+  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++, k++) {
+    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++, m++) {
       menuArr[i][j] = ' ';
     }
   }
@@ -514,44 +514,24 @@ const game = () => {
   }, 100);
 }
 
+const menuFuncAssistant = (y, x, array) => {
+  for (let i = y, k = 0; k < array.length; i++, k++) {
+    for (let j = x, m = 0; m < array[k].length; j++, m++) {
+      menuArr[i][j] = array[k][m];
+    }
+  }
+};
+
 const menuFunc = () => {
   blindset = 0;
   clearArr(menuArr);
-  for (let i = 4, k = 0; k < arrays.bombermanArr.length; i++ , k++) {
-    for (let j = 60, m = 0; m < arrays.bombermanArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.bombermanArr[k][m];
-    }
-  }
-  for (let i = 13, k = 0; k < arrays.playArr.length; i++ , k++) {
-    for (let j = 82, m = 0; m < arrays.playArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.playArr[k][m];
-    }
-  }
-  for (let i = 20, k = 0; k < arrays.optionsArr.length; i++ , k++) {
-    for (let j = 73, m = 0; m < arrays.optionsArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.optionsArr[k][m];
-    }
-  }
-  for (let i = 27, k = 0; k < arrays.creditsArr.length; i++ , k++) {
-    for (let j = 74, m = 0; m < arrays.creditsArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.creditsArr[k][m];
-    }
-  }
-  for (let i = 34, k = 0; k < arrays.exitArr.length; i++ , k++) {
-    for (let j = 81, m = 0; m < arrays.exitArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.exitArr[k][m];
-    }
-  }
-  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++ , k++) {
-    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.arrowRight[k][m];
-    }
-  }
-  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++ , k++) {
-    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.arrowLeft[k][m];
-    }
-  }
+  menuFuncAssistant(4, 60, arrays.bombermanArr);
+  menuFuncAssistant(13, 82, arrays.playArr);
+  menuFuncAssistant(20, 73, arrays.optionsArr);
+  menuFuncAssistant(27, 74, arrays.creditsArr);
+  menuFuncAssistant(34, 81, arrays.exitArr);
+  menuFuncAssistant(position1, position2 + 62, arrays.arrowRight);
+  menuFuncAssistant(position1, position2, arrays.arrowLeft);
   return menuArr;
 }
 
@@ -562,91 +542,38 @@ const optionsFunc = () => {
   blindset = 1;
   console.clear();
   clearArr(menuArr);
-  for (let i = 4, k = 0; k < arrays.bombermanArr.length; i++ , k++) {
-    for (let j = 60, m = 0; m < arrays.bombermanArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.bombermanArr[k][m];
-    }
-  }
-  for (let i = 13, k = 0; k < arrays.soundArr.length; i++ , k++) {
-    for (let j = 60, m = 0; m < arrays.soundArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.soundArr[k][m];
-    }
-  }
+  menuFuncAssistant(4, 60, arrays.bombermanArr);
+  menuFuncAssistant(13, 60, arrays.soundArr);
+
   switch (soundSwitch) {
     case true:
-      for (let i = 13, k = 0; k < arrays.onArr.length; i++ , k++) {
-        for (let j = 109, m = 0; m < arrays.onArr[k].length; j++ , m++) {
-          menuArr[i][j] = arrays.onArr[k][m];
-        }
-      }
+      menuFuncAssistant(13, 109, arrays.onArr);
       break;
     case false:
-      for (let i = 13, k = 0; k < arrays.offArr.length; i++ , k++) {
-        for (let j = 109, m = 0; m < arrays.offArr[k].length; j++ , m++) {
-          menuArr[i][j] = arrays.offArr[k][m];
-        }
-      }
+      menuFuncAssistant(13, 109, arrays.offArr);
       break;
-  }
-
-  for (let i = 20, k = 0; k < arrays.mapArr.length; i++ , k++) {
-    for (let j = 60, m = 0; m < arrays.mapArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.mapArr[k][m];
-    }
-  }
+  };
+  menuFuncAssistant(20, 60, arrays.mapArr);
   switch (mapSwitch) {
     case 0:
-      for (let i = 20, k = 0; k < arrays.defaultArr.length; i++ , k++) {
-        for (let j = 92, m = 0; m < arrays.defaultArr[k].length; j++ , m++) {
-          menuArr[i][j] = arrays.defaultArr[k][m];
-        }
-      }
+      menuFuncAssistant(20, 92, arrays.defaultArr);
       break;
     case 1:
-      for (let i = 20, k = 0; k < arrays.randomArr.length; i++ , k++) {
-        for (let j = 88, m = 0; m < arrays.randomArr[k].length; j++ , m++) {
-          menuArr[i][j] = arrays.randomArr[k][m];
-        }
-      }
+      menuFuncAssistant(20, 88, arrays.randomArr);
       break;
   }
-
-  for (let i = 27, k = 0; k < arrays.playersArr.length; i++ , k++) {
-    for (let j = 60, m = 0; m < arrays.playersArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.playersArr[k][m];
-    }
-  }
+  menuFuncAssistant(27, 60, arrays.playersArr);
   switch (playerSwitch) {
     case 0:
-      for (let i = 27, k = 0; k < arrays.twoArr.length; i++ , k++) {
-        for (let j = 111, m = 0; m < arrays.twoArr[k].length; j++ , m++) {
-          menuArr[i][j] = arrays.twoArr[k][m];
-        }
-      }
+      menuFuncAssistant(27, 111, arrays.twoArr);
       break;
     case 1:
-      for (let i = 27, k = 0; k < arrays.oneArr.length; i++ , k++) {
-        for (let j = 111, m = 0; m < arrays.oneArr[k].length; j++ , m++) {
-          menuArr[i][j] = arrays.oneArr[k][m];
-        }
-      }
+      menuFuncAssistant(27, 111, arrays.oneArr);
       break;
   }
-  for (let i = 34, k = 0; k < arrays.backArr.length; i++ , k++) {
-    for (let j = 81, m = 0; m < arrays.backArr[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.backArr[k][m];
-    }
-  }
-  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++ , k++) {
-    for (let j = position2 + 78, m = 0; m < arrays.arrowRight[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.arrowRight[k][m];
-    }
-  }
-  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++ , k++) {
-    for (let j = position2 - 14, m = 0; m < arrays.arrowLeft[k].length; j++ , m++) {
-      menuArr[i][j] = arrays.arrowLeft[k][m];
-    }
-  }
+  menuFuncAssistant(34, 81, arrays.backArr);
+  menuFuncAssistant(position1, position2 + 78, arrays.arrowRight);
+  menuFuncAssistant(position1, position2 - 14, arrays.arrowLeft);
   return menuArr;
 }
 const creditsFunc = () => {
@@ -689,8 +616,8 @@ const boosterGenerator = (sourceMap) => {
 
 let GeneratedBoosterNUmber;
 const getRandomInt = (min, max) => {
-  /* min = Math.ceil(min);
-  max = Math.floor(max); */
+  min = Math.ceil(min);
+  max = Math.floor(max);
   GeneratedBoosterNUmber = Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
