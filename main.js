@@ -11,6 +11,9 @@ let playerY = 1;
 // player 2 starter position
 let player2X = 11;
 let player2Y = 23;
+// com1 starter position
+let com1X = 1;
+let com1Y = 23;
 
 // If 'q' is pressed, exit the program.
 const keyProcessor = (key) => {
@@ -27,11 +30,11 @@ const keyProcessor = (key) => {
   } else {
     // If there isn't a bomb (9 is bomb) at player's position and there is a free space, the player move up,
     if (key === '\u0077' && playerX > 1 && smallMap[playerX - 1][playerY] === 0 && smallMap[playerX][playerY] !== 9) {
-    // console.clear();
+      // console.clear();
       smallMap[playerX][playerY] = 0;
       playerX--;
       smallMap[playerX][playerY] = 'X';
-    // common.print(common.largeMapGen(smallMap));
+      // common.print(common.largeMapGen(smallMap));
     }
   }
   if (key === '\u0073' && playerX < smallMap.length - 2 && smallMap[playerX + 1][playerY] === 0 && smallMap[playerX][playerY] === 9) {
@@ -79,14 +82,14 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2X--;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0038' && player2X > 1 && smallMap[player2X - 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2X--;
@@ -94,14 +97,14 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2X++;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0035' && player2X < smallMap.length - 2 && smallMap[player2X + 1][player2Y] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2X++;
@@ -109,14 +112,14 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2Y--;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0034' && player2Y > 1 && smallMap[player2X][player2Y - 1] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2Y--;
@@ -124,19 +127,19 @@ const keyProcessor = (key) => {
       // common.print(common.largeMapGen(smallMap));
     }
   }
-  if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] === 9) {
+  if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] === 8) {
     // console.clear();
-    smallMap[player2X][player2Y] = 9;
+    smallMap[player2X][player2Y] = 8;
     player2Y++;
     smallMap[player2X][player2Y] = 'Y';
     // common.print(common.largeMapGen(smallMap));
   } else {
-    if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] !== 9) {
+    if (key === '\u0036' && player2Y < smallMap[0].length - 2 && smallMap[player2X][player2Y + 1] === 0 && smallMap[player2X][player2Y] !== 8) {
       // console.clear();
       smallMap[player2X][player2Y] = 0;
       player2Y++;
       smallMap[player2X][player2Y] = 'Y';
-      // common.print(common.largeMapGen(smallMap));
+      // smallMap[com1X - 1][com1Y] === 0common.print(common.largeMapGen(smallMap));
     }
   }
   // If 'f' key pressed, then player 1 plant a bomb.
@@ -154,7 +157,7 @@ smallMap = common.generatedMap(smallMap);
 let board = common.largeMapGen(smallMap);
 
 let i = 1;
-setTimeout(function run () {
+setTimeout(function run() {
   common.print(common.largeMapGen(smallMap));
   i++;
   setTimeout(run, 100);
@@ -163,11 +166,11 @@ setTimeout(function run () {
 // Bomb in minimap is 9.
 let bomb1 = 9;
 let bomb2 = 8;
-
+let bomb3 = 'B';
 // Number of player 1 & 2 bombs
 let player1bomb = 100;
 let player2bomb = 100;
-
+let bot1Bomb = 100;
 // This function remove the explosion from the map.
 const removeExplosion = () => {
   for (let i = 0; i < smallMap.length; i++) {
@@ -183,6 +186,16 @@ const removeExplosion2 = () => {
   for (let i = 0; i < smallMap.length; i++) {
     for (let j = 0; j < smallMap[i].length; j++) {
       if (smallMap[i][j] === '#') {
+        smallMap[i][j] = 0;
+      }
+    }
+  }
+};
+
+const removeExplosion3 = () => {
+  for (let i = 0; i < smallMap.length; i++) {
+    for (let j = 0; j < smallMap[i].length; j++) {
+      if (smallMap[i][j] === '+') {
         smallMap[i][j] = 0;
       }
     }
@@ -209,3 +222,105 @@ const placeBombPlayer2 = () => {
     setTimeout(removeExplosion2, 4000);
   }
 };
+
+const placeBombBot1 = () => {
+  if (bot1Bomb > 0) {
+    smallMap[com1X][com1Y] = bomb3;
+    bot1Bomb--;
+    setTimeout(common.explode3, 2500);
+    setTimeout(removeExplosion3, 4000);
+  }
+};
+
+const up = () => {
+  if (com1X > 1 && smallMap[com1X - 1][com1Y] === 0) {
+    // console.clear();
+    smallMap[com1X][com1Y] = 0;
+    com1X--;
+    smallMap[com1X][com1Y] = 'C';
+    // common.print(common.largeMapGen(smallMap));
+  } else {
+    if (com1X > 1 && smallMap[com1X - 1][com1Y] === 0 && smallMap[com1X][com1Y] !== '+') {
+      // console.clear();
+      smallMap[com1X][com1Y] = 0;
+      com1X--;
+      smallMap[com1X][com1Y] = 'C';
+    }
+  }
+};
+const down = () => {
+  if (com1X < smallMap.length - 2 && smallMap[com1X + 1][com1Y] === 0) {
+    // console.clear();
+    smallMap[com1X][com1Y] = 0;
+    com1X++;
+    smallMap[com1X][com1Y] = 'C';
+    // common.print(common.largeMapGen(smallMap));
+  } else {
+    if (com1X < smallMap.length - 2 && smallMap[com1X + 1][com1Y] === 0 && smallMap[com1X][com1Y] !== '+') {
+      // console.clear();
+      smallMap[com1X][com1Y] = 0;
+      com1X++;
+      smallMap[com1X][com1Y] = 'C';
+      // common.print(common.largeMapGen(smallMap));
+    }
+  }
+};
+const left = () => {
+  if (com1Y > 1 && smallMap[com1X][com1Y - 1] === 0) {
+    // console.clear();
+    smallMap[com1X][com1Y] = 0;
+    com1Y--;
+    smallMap[com1X][com1Y] = 'C';
+  } else {
+    if (com1X > 1 && smallMap[com1X][com1Y - 1] === 0 && smallMap[com1X][com1Y] !== '+') {
+      // console.clear();
+      smallMap[com1X][com1Y] = 0;
+      com1Y--;
+      smallMap[com1X][com1Y] = 'C';
+      // common.print(common.largeMapGen(smallMap));
+    }
+  }
+};
+const right = () => {
+  if (com1Y > 1 && smallMap[com1X][com1Y + 1] === 0) {
+    // console.clear();
+    smallMap[com1X][com1Y] = 0;
+    com1Y++;
+    smallMap[com1X][com1Y] = 'C';
+  }
+  else {
+    if (com1Y > 1 && smallMap[com1X][com1Y + 1] === 0 && smallMap[com1X][com1Y] !== '+') {
+      // console.clear();
+      smallMap[com1X][com1Y] = 0;
+      com1Y++;
+      smallMap[com1X][com1Y] = 'C';
+      // smallMap[com1X - 1][com1Y] === 0common.print(common.largeMapGen(smallMap));
+    }
+  }
+};
+
+
+
+let bot1 = () => {
+  let randomNumber = 1 + Math.round(Math.random() * 3)
+  if (randomNumber === 3) {
+    up();
+  } else if (randomNumber === 2) {
+    down();
+  } else if (randomNumber === 1) {
+    left();
+  } else if (randomNumber === 4) {
+    right();
+  }
+};
+
+
+
+let k = 1;
+setTimeout(function botmove() {
+  bot1();
+  setTimeout(placeBombBot1, 4000)
+  setTimeout(botmove, 1000);
+}, 1000);
+
+
