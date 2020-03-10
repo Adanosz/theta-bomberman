@@ -12,7 +12,7 @@ let smallMap = arrays.smallMap;
 
 let player1 = {
   life: 1,
-  bombs: 5,
+  bombs: 10,
   pushAbility: false
 };
 let player2 = {
@@ -358,6 +358,7 @@ const keyProcessor = (key) => {
       switch (playerXpositionValue === 9) {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
           playerX--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
@@ -365,7 +366,7 @@ const keyProcessor = (key) => {
           arrays.smallMap[playerX][playerY] = 0;
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
-              player1bomb.firepover++;
+              player1bomb.firepower++;
               break;
             case 5:
               player1.bombs++;
@@ -387,11 +388,27 @@ const keyProcessor = (key) => {
       switch (playerXpositionValue === 9) {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepower++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
+          arrays.boostersMap[playerX][playerY] = 0;
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
@@ -401,11 +418,26 @@ const keyProcessor = (key) => {
       switch (playerXpositionValue === 9) {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepower++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
           arrays.boostersMap[playerX][playerY] = 0;
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
@@ -416,11 +448,26 @@ const keyProcessor = (key) => {
       switch (playerXpositionValue === 9) {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepower++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
           arrays.boostersMap[playerX][playerY] = 0;
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
@@ -436,6 +483,20 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+              break;
+          }
           arrays.boostersMap[player2X][player2Y] = 0;
           player2X--;
           arrays.smallMap[player2X][player2Y] = 'Y';
@@ -451,6 +512,20 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+              break;
+          }
           arrays.boostersMap[player2X][player2Y] = 0;
           player2X++;
           arrays.smallMap[player2X][player2Y] = 'Y';
@@ -466,6 +541,20 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+              break;
+          }
           arrays.boostersMap[player2X][player2Y] = 0;
           player2Y--;
           arrays.smallMap[player2X][player2Y] = 'Y';
@@ -481,6 +570,21 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+
+              break;
+          }
           arrays.boostersMap[player2X][player2Y] = 0;
           player2Y++;
           arrays.smallMap[player2X][player2Y] = 'Y';
