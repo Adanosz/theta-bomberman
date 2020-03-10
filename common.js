@@ -338,29 +338,42 @@ const keyProcessor = (key) => {
       print(menuFunc());
     }
     if (key === 'w' && playerXcanUp === true) {
-      switch (arrays.smallMap[playerX][playerY]) {
-        case (9):
+      switch (playerXpositionValue === 9) {
+        case true:
           arrays.smallMap[playerX][playerY] = 9;
           playerX--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case ('X'):
-          arrays.smallMap[playerX][playerY] = 'X';
+        case false:
           arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepover++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
+          arrays.boostersMap[playerX][playerY] = 0;
           playerX--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
       }
     }
     if (key === 's' && playerXcanDown === true) {
-      switch (playerXpositionValue) {
-        case 9:
+      switch (playerXpositionValue === 9) {
+        case true:
           arrays.smallMap[playerX][playerY] = 9;
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case 'X':
-          arrays.smallMap[playerX][playerY] = 'X';
+        case false:
           arrays.smallMap[playerX][playerY] = 0;
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
@@ -368,30 +381,30 @@ const keyProcessor = (key) => {
       }
     }
     if (key === 'a' && playerXcanLeft === true) {
-      switch (playerXpositionValue) {
-        case 9:
+      switch (playerXpositionValue === 9) {
+        case true:
           arrays.smallMap[playerX][playerY] = 9;
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case 'X':
-          arrays.smallMap[playerX][playerY] = 'X';
+        case false:
           arrays.smallMap[playerX][playerY] = 0;
+          arrays.boostersMap[playerX][playerY] = 0;
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
       }
     }
     if (key === 'd' && playerXcanRight === true) {
-      switch (playerXpositionValue) {
-        case 9:
+      switch (playerXpositionValue === 9) {
+        case true:
           arrays.smallMap[playerX][playerY] = 9;
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
-        case 'X':
-          arrays.smallMap[playerX][playerY] = 'X';
+        case false:
           arrays.smallMap[playerX][playerY] = 0;
+          arrays.boostersMap[playerX][playerY] = 0;
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
@@ -406,6 +419,7 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2X--;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
@@ -420,6 +434,7 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2X++;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
@@ -434,6 +449,7 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2Y--;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
@@ -448,6 +464,7 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2Y++;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
@@ -704,6 +721,7 @@ const boosters = (sourceMap) => {
   }
   return sourceMap;
 };
+
 
 module.exports = {
   print,
