@@ -728,8 +728,7 @@ const keyProcessor = (key) => {
     }
     if (key === 'f') {
       placeBombPlayer1();
-      player1bomb.coordX = playerX;
-      player1bomb.coordY = playerY;
+      bombObjCreator(bombStorageX, playerX, playerY);
     }
     if (key === '0') {
       placeBombPlayer2();
@@ -759,11 +758,42 @@ const removeExplosion2 = () => {
   }
 };
 
+
+
+let bombStorageX = [];
+let bombStorageY = [];
+
+const bombObjCreator = (storage, x, y) => {
+  let obj = {
+    x: x,
+    y: y,
+    time: 2500
+  };
+  storage.push(obj);
+}
+
+const bombObjTimeDecreaserPro3000Plus = (storage) => {
+  for (let i = 0; i < storage.length; i++) {
+    storage[i].time -= 100;
+  }
+}
+
+const bombTimeChecker = (player, storage, explode) => {
+  if (storage.length > 0) {
+    if (storage[0].time <= 0) {
+      player.coordX = storage[0].x
+      player.coordY = storage[0].y
+      explode();
+      storage.shift();
+    }
+  }
+}
+
 const placeBombPlayer1 = () => {
   if (player1.bombs > 0) {
     arrays.smallMap[playerX][playerY] = bomb1;
     player1.bombs--;
-    setTimeout(explode1, 2500);
+    // setTimeout(explode1, 2500);
     setTimeout(removeExplosion, 4000);
   }
 };
@@ -782,6 +812,10 @@ const game = () => {
   setTimeout(function run() {
     boosters(smallMap);
     print(largeMapGen(arrays.smallMap));
+    bombObjTimeDecreaserPro3000Plus(bombStorageX);
+    bombObjTimeDecreaserPro3000Plus(bombStorageY);
+    bombTimeChecker(player1bomb, bombStorageX, explode1);
+    bombTimeChecker(player2bomb, bombStorageY, explode2);
     if (blindset === 2) {
       setTimeout(run, 100);
     }
