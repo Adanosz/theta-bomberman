@@ -359,12 +359,18 @@ const keyProcessor = (key) => {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX - 1][playerY] === '*') {
+            player1.life--
+          }
           playerX--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX - 1][playerY] === '*') {
+            player1.life--
+          }
           playerX--;
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
@@ -390,12 +396,18 @@ const keyProcessor = (key) => {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX + 1][playerY] === '*') {
+            player1.life--
+          }
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX + 1][playerY] === '*') {
+            player1.life--
+          }
           playerX++;
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
@@ -421,12 +433,18 @@ const keyProcessor = (key) => {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX][playerY - 1] === '*') {
+            player1.life--
+          }
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX][playerY - 1] === '*') {
+            player1.life--
+          }
           playerY--;
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
@@ -452,12 +470,18 @@ const keyProcessor = (key) => {
         case true:
           arrays.smallMap[playerX][playerY] = 9;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX][playerY + 1] === '*') {
+            player1.life--
+          }
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
           arrays.boostersMap[playerX][playerY] = 0;
+          if (smallMap[playerX][playerY + 1] === '*') {
+            player1.life--
+          }
           playerY++;
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
@@ -661,6 +685,7 @@ const game = () => {
       console.clear();
       print(menuFunc());
     }
+    console.log('p1 life =(', player1.life, ')', 'p1 bombs =(',player1.bombs, ')', 'p1 can push =(', player1.pushAbility,')', 'p1 firepower =(', player1bomb.firepower, ')', smallMap[playerX][playerY]);
   }, 100);
 }
 
@@ -781,7 +806,6 @@ const boosters = (sourceMap) => {
   }
   return sourceMap;
 };
-
 
 module.exports = {
   print,
