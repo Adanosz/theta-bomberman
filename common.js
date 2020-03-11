@@ -48,6 +48,9 @@ const explode1 = () => {
               break;
             }
             smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*';
+            /* if (smallMap[player1bomb.coordX - f][player1bomb.coordY] === smallMap[playerX][playerY]) {
+              player1.life--
+            } */
           } else {
             direction = 'right';
             break;
@@ -64,6 +67,9 @@ const explode1 = () => {
               break;
             }
             smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*';
+            /* if (smallMap[player1bomb.coordX][player1bomb.coordY + f] === smallMap[playerX][playerY]) {
+              player1.life--
+            } */
           } else {
             direction = 'down';
             break;
@@ -80,6 +86,9 @@ const explode1 = () => {
               break;
             }
             smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*';
+            /* if (smallMap[player1bomb.coordX + f][player1bomb.coordY] === smallMap[playerX][playerY]) {
+              player1.life--
+            } */
           } else {
             direction = 'left';
             break;
@@ -96,6 +105,9 @@ const explode1 = () => {
               break;
             }
             smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*';
+            /* if (smallMap[player1bomb.coordX][player1bomb.coordY - f] === smallMap[playerX][playerY]) {
+              player1.life--
+            } */
           } else {
             direction = 'up';
             break;
@@ -105,8 +117,14 @@ const explode1 = () => {
         break;
     }
   }
+
   smallMap[player1bomb.coordX][player1bomb.coordY] = '*';
-  player1.bombs++;
+  if (smallMap[player1bomb.coordX][player1bomb.coordY] === smallMap[playerX][playerY]) {
+    player1.life--
+  }
+  if (smallMap[player1bomb.coordX][player1bomb.coordY] === smallMap[player2X][player2Y]) {
+    player2.life--
+  } player1.bombs++;
 };
 const explode2 = () => {
   for (let i = 0; i < 4; i++) {
