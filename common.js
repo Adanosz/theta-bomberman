@@ -42,13 +42,18 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX - f][player1bomb.coordY]) === true) {
             if (smallMap[player1bomb.coordX - f][player1bomb.coordY] === 1) {
               smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*'
+              /* setTimeout((() => { if (smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*') {
+                smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0
+              }
+            }), 1000) */
               direction = 'right';
               break;
             }
             smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*';
-            /* if (smallMap[player1bomb.coordX - f][player1bomb.coordY] === smallMap[playerX][playerY]) {
-              player1.life--
-            } */
+            /* setTimeout((() => { if (smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*') {
+              smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0
+            }
+          }), 1000) */
           } else {
             direction = 'right';
             break;
@@ -61,13 +66,18 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX][player1bomb.coordY + f]) === true) {
             if (smallMap[player1bomb.coordX][player1bomb.coordY + f] === 1) {
               smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*'
+              /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*') {
+                smallMap[player1bomb.coordX][player1bomb.coordY + f] = 0
+              }
+            }), 1000) */
               direction = 'down';
               break;
             }
             smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*';
-            /* if (smallMap[player1bomb.coordX][player1bomb.coordY + f] === smallMap[playerX][playerY]) {
-              player1.life--
-            } */
+            /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*') {
+              smallMap[player1bomb.coordX][player1bomb.coordY + f] = 0
+            }
+          }), 1000) */
           } else {
             direction = 'down';
             break;
@@ -80,13 +90,18 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX + f][player1bomb.coordY]) === true) {
             if (smallMap[player1bomb.coordX + f][player1bomb.coordY] === 1) {
               smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*'
+              /* setTimeout((() => { if (smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*') {
+                smallMap[player1bomb.coordX + f][player1bomb.coordY] = 0
+              }
+            }), 1000) */
               direction = 'left';
               break;
             }
             smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*';
-            /* if (smallMap[player1bomb.coordX + f][player1bomb.coordY] === smallMap[playerX][playerY]) {
-              player1.life--
-            } */
+            /* setTimeout((() => { if (smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*') {
+              smallMap[player1bomb.coordX + f][player1bomb.coordY] = 0
+            }
+          }), 1000) */
           } else {
             direction = 'left';
             break;
@@ -99,13 +114,18 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX][player1bomb.coordY - f]) === true) {
             if (smallMap[player1bomb.coordX][player1bomb.coordY - f] === 1) {
               smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*'
+              /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*') {
+                smallMap[player1bomb.coordX][player1bomb.coordY - f] = 0
+              }
+            }), 1000) */
               direction = 'up';
               break;
             }
             smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*';
-            /* if (smallMap[player1bomb.coordX][player1bomb.coordY - f] === smallMap[playerX][playerY]) {
-              player1.life--
-            } */
+            /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*') {
+              smallMap[player1bomb.coordX][player1bomb.coordY - f] = 0
+            }
+          }), 1000) */
           } else {
             direction = 'up';
             break;
@@ -117,6 +137,10 @@ const explode1 = () => {
   }
 
   smallMap[player1bomb.coordX][player1bomb.coordY] = '*';
+  /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY] = '*') {
+    smallMap[player1bomb.coordX][player1bomb.coordY] = 0
+  }
+}), 1500) */
   if (smallMap[player1bomb.coordX][player1bomb.coordY] === smallMap[playerX][playerY]) {
     player1.life--
   }
@@ -196,6 +220,111 @@ const explode2 = () => {
   smallMap[player2bomb.coordX][player2bomb.coordY] = '#';
   player2.bombs++;
 };
+
+let makeItHappen = ['*'];
+const explRemove1 = () => {
+  for (let i = 0; i < 4; i++) {
+    switch (direction) {
+      case 'up':
+        for (let f = 1; f <= player1bomb.firepower; f++) {
+          if (smallMap[player1bomb.coordX - f][player1bomb.coordY] === '*') {
+            smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0;
+          } else {
+            direction = 'right';
+            break;
+          }
+          direction = 'right';
+        }
+        break;
+      case 'right':
+        for (let f = 1; f <= player1bomb.firepower; f++) {
+          if (smallMap[player1bomb.coordX][player1bomb.coordY + f] === '*') {
+            smallMap[player1bomb.coordX][player1bomb.coordY + f] = 0;
+          } else {
+            direction = 'down';
+            break;
+          }
+          direction = 'down';
+        }
+        break;
+      case 'down':
+        for (let f = 1; f <= player1bomb.firepower; f++) {
+          if (smallMap[player1bomb.coordX + f][player1bomb.coordY] === '*') {
+            smallMap[player1bomb.coordX + f][player1bomb.coordY] = 0;
+          } else {
+            direction = 'left';
+            break;
+          }
+          direction = 'left';
+        }
+        break;
+      case 'left':
+        for (let f = 1; f <= player1bomb.firepower; f++) {
+          if (smallMap[player1bomb.coordX][player1bomb.coordY - f] === '*') {
+            smallMap[player1bomb.coordX][player1bomb.coordY - f] = 0;
+          } else {
+            direction = 'up';
+            break;
+          }
+          direction = 'up';
+        }
+        break;
+    }
+  }
+  smallMap[player1bomb.coordX][player1bomb.coordY] = 0;
+}
+
+const explRemove2 = () => {
+  for (let i = 0; i < 4; i++) {
+    switch (direction) {
+      case 'up':
+        for (let f = 1; f <= player2bomb.firepower; f++) {
+          if (smallMap[player2bomb.coordX - f][player2bomb.coordY] === '#') {
+            smallMap[player2bomb.coordX - f][player2bomb.coordY] = 0;
+          } else {
+            direction = 'right';
+            break;
+          }
+          direction = 'right';
+        }
+        break;
+      case 'right':
+        for (let f = 1; f <= player2bomb.firepower; f++) {
+          if (smallMap[player2bomb.coordX][player2bomb.coordY + f] === '#') {
+            smallMap[player2bomb.coordX][player2bomb.coordY + f] = 0;
+          } else {
+            direction = 'down';
+            break;
+          }
+          direction = 'down';
+        }
+        break;
+      case 'down':
+        for (let f = 1; f <= player2bomb.firepower; f++) {
+          if (smallMap[player2bomb.coordX + f][player2bomb.coordY] === '#') {
+            smallMap[player2bomb.coordX + f][player2bomb.coordY] = 0;
+          } else {
+            direction = 'left';
+            break;
+          }
+          direction = 'left';
+        }
+        break;
+      case 'left':
+        for (let f = 1; f <= player2bomb.firepower; f++) {
+          if (smallMap[player2bomb.coordX][player2bomb.coordY - f] === '#') {
+            smallMap[player2bomb.coordX][player2bomb.coordY - f] = 0;
+          } else {
+            direction = 'up';
+            break;
+          }
+          direction = 'up';
+        }
+        break;
+    }
+  }
+  smallMap[player2bomb.coordX][player2bomb.coordY] = 0;
+}
 
 const oldexplode2 = () => {
   for (let i = 0; i < smallMap.length; i++) {
@@ -769,45 +898,24 @@ const keyProcessor = (key) => {
     }
     if (key === 'f') {
       placeBombPlayer1();
-      bombObjCreator(bombStorageX, playerX, playerY);
     }
     if (key === '0') {
-      placeBombPlayer2();
-      bombObjCreator(bombStorageY, player2X, player2Y);
+      placeBombPlayer2();      
     }
   }
 };
-
-const removeExplosion = () => {
-  for (let i = 0; i < arrays.smallMap.length; i++) {
-    for (let j = 0; j < arrays.smallMap[i].length; j++) {
-      if (arrays.smallMap[i][j] === '*') {
-        arrays.smallMap[i][j] = 0;
-      }
-    }
-  }
-};
-
-const removeExplosion2 = () => {
-  for (let i = 0; i < arrays.smallMap.length; i++) {
-    for (let j = 0; j < arrays.smallMap[i].length; j++) {
-      if (arrays.smallMap[i][j] === '#') {
-        arrays.smallMap[i][j] = 0;
-      }
-    }
-  }
-};
-
-
 
 let bombStorageX = [];
+let bombExplTStorageX = [];
 let bombStorageY = [];
+let bombExplTStorageY = [];
 
 const bombObjCreator = (storage, x, y) => {
   let obj = {
     x: x,
     y: y,
-    time: 2500
+    time: 2500,
+    time2: 4000
   };
   storage.push(obj);
 }
@@ -815,6 +923,23 @@ const bombObjCreator = (storage, x, y) => {
 const bombObjTimeDecreaserPro3000Plus = (storage) => {
   for (let i = 0; i < storage.length; i++) {
     storage[i].time -= 100;
+  }
+}
+
+const bombExplRemTimeDecreaserPro3000Plus = (storage) => {
+  for (let i = 0; i < storage.length; i++) {
+    storage[i].time2 -= 100;
+  }
+}
+
+const bombExplRemTimeChecker = (player, storage, explRemove) => {
+  if (storage.length > 0) {
+    if (storage[0].time2 <= 0) {
+      player.coordX = storage[0].x
+      player.coordY = storage[0].y
+      explRemove();
+      storage.shift();
+    }
   }
 }
 
@@ -833,8 +958,8 @@ const placeBombPlayer1 = () => {
   if (player1.bombs > 0) {
     arrays.smallMap[playerX][playerY] = bomb1;
     player1.bombs--;
-    // setTimeout(explode1, 2500);
-    setTimeout(removeExplosion, 4000);
+    bombObjCreator(bombStorageX, playerX, playerY);
+    bombObjCreator(bombExplTStorageX, playerX, playerY);
   }
 };
 
@@ -842,8 +967,8 @@ const placeBombPlayer2 = () => {
   if (player2.bombs > 0) {
     arrays.smallMap[player2X][player2Y] = bomb2;
     player2.bombs--;
-    // setTimeout(explode2, 2500);
-    setTimeout(removeExplosion2, 4000);
+    bombObjCreator(bombStorageY, player2X, player2Y);
+    bombObjCreator(bombExplTStorageY, player2X, player2Y)
   }
 };
 
@@ -854,8 +979,13 @@ const game = () => {
     print(largeMapGen(arrays.smallMap));
     bombObjTimeDecreaserPro3000Plus(bombStorageX);
     bombObjTimeDecreaserPro3000Plus(bombStorageY);
+    bombExplRemTimeDecreaserPro3000Plus(bombExplTStorageX);
+    bombExplRemTimeDecreaserPro3000Plus(bombExplTStorageY);
     bombTimeChecker(player1bomb, bombStorageX, explode1);
     bombTimeChecker(player2bomb, bombStorageY, explode2);
+    bombExplRemTimeChecker(player1bomb, bombExplTStorageX, explRemove1);
+    bombExplRemTimeChecker(player2bomb, bombExplTStorageY, explRemove2);
+
     if (blindset === 2) {
       setTimeout(run, 100);
     }
@@ -996,8 +1126,8 @@ module.exports = {
   explode1,
   explode2,
   boosterGenerator,
-  removeExplosion,
-  removeExplosion2,
+  // removeExplosion,
+  // removeExplosion2,
   placeBombPlayer1,
   placeBombPlayer2,
   keyProcessor,
