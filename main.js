@@ -9,7 +9,6 @@ stdin.setEncoding('utf8');
 stdin.on('data', common.keyProcessor);
 let smallMap = arrays.smallMap;
 arrays.smallMap = common.generatedMap(arrays.smallMap);
-let board = common.largeMapGen(arrays.smallMap);
 
 let menuArr = common.menuArrGen();
 common.clearArr(menuArr);
