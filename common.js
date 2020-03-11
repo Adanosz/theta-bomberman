@@ -32,9 +32,7 @@ let player2bomb = {
   coordY: 0
 };
 
-
-let explodeRange = 1;
-let brokeable = [0, 1, 'X', 'Y'];
+let brokeable = [0, 1, 'X', 'Y', 4, 5, 6, 7];
 let direction = 'up';
 const explode1 = () => {
   for (let i = 0; i < 4; i++) {
@@ -771,13 +769,11 @@ const keyProcessor = (key) => {
     }
     if (key === 'f') {
       placeBombPlayer1();
-      player1bomb.coordX = playerX;
-      player1bomb.coordY = playerY;
+      bombObjCreator(bombStorageX, playerX, playerY);
     }
     if (key === '0') {
       placeBombPlayer2();
-      player2bomb.coordX = player2X;
-      player2bomb.coordY = player2Y;
+      bombObjCreator(bombStorageY, player2X, player2Y);
     }
   }
 };
@@ -802,11 +798,42 @@ const removeExplosion2 = () => {
   }
 };
 
+
+
+let bombStorageX = [];
+let bombStorageY = [];
+
+const bombObjCreator = (storage, x, y) => {
+  let obj = {
+    x: x,
+    y: y,
+    time: 2500
+  };
+  storage.push(obj);
+}
+
+const bombObjTimeDecreaserPro3000Plus = (storage) => {
+  for (let i = 0; i < storage.length; i++) {
+    storage[i].time -= 100;
+  }
+}
+
+const bombTimeChecker = (player, storage, explode) => {
+  if (storage.length > 0) {
+    if (storage[0].time <= 0) {
+      player.coordX = storage[0].x
+      player.coordY = storage[0].y
+      explode();
+      storage.shift();
+    }
+  }
+}
+
 const placeBombPlayer1 = () => {
   if (player1.bombs > 0) {
     arrays.smallMap[playerX][playerY] = bomb1;
     player1.bombs--;
-    setTimeout(explode1, 2500);
+    // setTimeout(explode1, 2500);
     setTimeout(removeExplosion, 4000);
   }
 };
@@ -815,7 +842,7 @@ const placeBombPlayer2 = () => {
   if (player2.bombs > 0) {
     arrays.smallMap[player2X][player2Y] = bomb2;
     player2.bombs--;
-    setTimeout(explode2, 2500);
+    // setTimeout(explode2, 2500);
     setTimeout(removeExplosion2, 4000);
   }
 };
@@ -825,6 +852,10 @@ const game = () => {
   setTimeout(function run() {
     boosters(smallMap);
     print(largeMapGen(arrays.smallMap));
+    bombObjTimeDecreaserPro3000Plus(bombStorageX);
+    bombObjTimeDecreaserPro3000Plus(bombStorageY);
+    bombTimeChecker(player1bomb, bombStorageX, explode1);
+    bombTimeChecker(player2bomb, bombStorageY, explode2);
     if (blindset === 2) {
       setTimeout(run, 100);
     }
