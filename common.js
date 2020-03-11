@@ -12,12 +12,12 @@ let smallMap = arrays.smallMap;
 
 let player1 = {
   life: 1,
-  bombs: 10,
+  bombs: 1,
   pushAbility: false
 };
 let player2 = {
   life: 1,
-  bombs: 5,
+  bombs: 1,
   pushAbility: false
 };
 
@@ -27,7 +27,6 @@ let player1bomb = {
 let player2bomb = {
   firepower: 1
 };
-
 
 let explodeRange = 1;
 const explode1 = () => {
@@ -51,7 +50,7 @@ const explode1 = () => {
         smallMap[i][j] = '*';
       }
     }
-  }
+  } player1.bombs++;
 };
 
 const explode2 = () => {
@@ -75,7 +74,7 @@ const explode2 = () => {
         smallMap[i][j] = '#';
       }
     }
-  }
+  } player2.bombs++;
 };
 
 const largeMapGen = (smallMap) => {
@@ -639,7 +638,7 @@ const placeBombPlayer2 = () => {
 
 const game = () => {
   blindset = 2;
-  setTimeout(function run() {
+  setTimeout(function run () {
     boosters(smallMap);
     print(largeMapGen(arrays.smallMap));
     if (blindset === 2) {
@@ -769,7 +768,6 @@ const boosters = (sourceMap) => {
   }
   return sourceMap;
 };
-
 
 module.exports = {
   print,
