@@ -1,27 +1,38 @@
+const arrays = require('./arrays.js');
+
 const print = (printable) => {
+  // print an array as string, per line
+  // used everywhere
+  console.clear();
   for (let i = 0; i < printable.length; i++) {
     console.log(printable[i].join('').toString());
   }
 };
+let smallMap = arrays.smallMap;
 
-let smallMap = [
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-  [2, 'X', 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 'C', 2],
-  [2, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 2],
-  [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 3, 1, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 2],
-  [2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 3, 0, 2],
-  [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 'Y', 2],
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-];
+let player1 = {
+  life: 1,
+  bombs: 10,
+  pushAbility: false
+};
+let player2 = {
+  life: 1,
+  bombs: 5,
+  pushAbility: false
+};
+
+let player1bomb = {
+  firepower: 1
+};
+let player2bomb = {
+  firepower: 1
+};
+
+
 let explodeRange = 1;
-// This function is for the bomb explosion. If there is a destructible object next to a bomb, then it will be vanish.
 const explode1 = () => {
+  // This function is for the bomb explosion. If there is a destructible object next to a bomb,
+  // then it will be vanish.
   for (let i = 0; i < smallMap.length; i++) {
     for (let j = 0; j < smallMap[i].length; j++) {
       if (smallMap[i][j] === 9 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
@@ -44,6 +55,8 @@ const explode1 = () => {
 };
 
 const explode2 = () => {
+  /*   let obj = { key1: 3, key2: 1, time: 1231321 };
+    arr */
   for (let i = 0; i < smallMap.length; i++) {
     for (let j = 0; j < smallMap[i].length; j++) {
       if (smallMap[i][j] === 8 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
@@ -95,115 +108,61 @@ const largeMapGen = (smallMap) => {
   for (let i = 0; i < board.length; i++) {
     board[i] = new Array(200);
   }
-
-  // elements
-  const freeSpace = ['░'];
-  const softWall = ['█'];
-  const fixWall = ['▓'];
-  const border = ['▚'];
-
+  // elements kiszervezve arrays-be / 16-81 sor
   // convert smallMap indexes into 8x4 array
   let position1 = 0;
   let position2 = 0;
-  for (let i = 0, a = position1; i < smallMap.length; i++ , a += 4) {
-    for (let j = 0, b = position2; j < smallMap[i].length; j++ , b += 8) {
-      if (smallMap[i][j] === 0) {
+  for (let i = 0, a = position1; i < smallMap.length; i++, a += 4) {
+    for (let j = 0, b = position2; j < smallMap[i].length; j++, b += 8) {
+      const largeMapGenAssistant = (type) => {
         for (let i = 0; i < 4; i++) {
           for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = freeSpace[0];
+            board[a + i][b + j] = type[i][j];
           }
         }
       }
-      if (smallMap[i][j] === 1) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = softWall[0];
-          }
-        }
-      }
-      if (smallMap[i][j] === 2) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = border[0];
-          }
-        }
-      }
-      if (smallMap[i][j] === 3) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = fixWall[0];
-          }
-        }
-      }
-      if (smallMap[i][j] === 5) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 5;
-          }
-        }
-      }
-      if (smallMap[i][j] === 'X') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'X';
-          }
-        }
-      }
-      if (smallMap[i][j] === 'Y') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'Y';
-          }
-        }
-      }
-      if (smallMap[i][j] === '*') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = '*';
-          }
-        }
-      }
-      if (smallMap[i][j] === 9) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 9;
-          }
-        }
-      }
-      if (smallMap[i][j] === '#') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = '#';
-          }
-        }
-      }
-      if (smallMap[i][j] === 8) {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 8;
-          }
-        }
-      }
-      if (smallMap[i][j] === 'C') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'C';
-          }
-        }
-      }
-      if (smallMap[i][j] === 'B') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = 'B';
-          }
-        }
-      }
-      if (smallMap[i][j] === '+') {
-        for (let i = 0; i < 4; i++) {
-          for (let j = 0; j < 8; j++) {
-            board[a + i][b + j] = '+';
-          }
-        }
+      switch (smallMap[i][j]) {
+        case 0:
+          largeMapGenAssistant(arrays.freeSpace);
+          break;
+        case 1:
+          largeMapGenAssistant(arrays.softWall);
+          break;
+        case 2:
+          largeMapGenAssistant(arrays.border);
+          break;
+        case 3:
+          largeMapGenAssistant(arrays.fixWall);
+          break;
+        case 4:
+          largeMapGenAssistant(arrays.PRESENT_FirePower);
+          break;
+        case 5:
+          largeMapGenAssistant(arrays.PRESENT_PlusBomb);
+          break;
+        case 6:
+          largeMapGenAssistant(arrays.PRESENT_PushTheBomb);
+          break;
+        case 7:
+          largeMapGenAssistant(arrays.PRESENT_ExtraLife);
+          break;
+        case 'X':
+          largeMapGenAssistant(arrays.playerXDesign);
+          break;
+        case 'Y':
+          largeMapGenAssistant(arrays.playerYDesign);
+          break;
+        case '*':
+          largeMapGenAssistant(arrays.playerXExplode);
+          break;
+        case 9:
+          largeMapGenAssistant(arrays.playerXbombDesign);
+          break;
+        case '#':
+          largeMapGenAssistant(arrays.playerYExplode);
+          break;
+        case 8:
+          largeMapGenAssistant(arrays.playerYbombDesign);
       }
     }
   }
@@ -212,7 +171,7 @@ const largeMapGen = (smallMap) => {
   board.splice(0, 3);
   board.splice(-4, 3);
   for (let i = 0; i < 6; i++) {
-    for (let i = 0, j = 0; i < board.length; i++ , j++) {
+    for (let i = 0, j = 0; i < board.length; i++, j++) {
       board[i].pop();
       board[j].shift();
     }
@@ -221,6 +180,8 @@ const largeMapGen = (smallMap) => {
 };
 
 const generatedMap = (sourceMap) => {
+  // randomize empty spaces
+  // used in game before generating large map
   for (let i = 0; i < sourceMap.length; i++) {
     for (let j = 0; j < sourceMap[i].length; j++) {
       if (sourceMap[i][j] === 1) {
@@ -236,14 +197,665 @@ const generatedMap = (sourceMap) => {
   return sourceMap;
 };
 
+const menuArrGen = () => {
+  // generates the empty menu array
+  // used in menu
+  let menuArr = new Array(44);
+  for (let i = 0; i < menuArr.length; i++) {
+    menuArr[i] = new Array(176);
+  }
+  return menuArr;
+}
+let menuArr = menuArrGen();
+const menuSelectionMove = () => { // leftArrow, rightArrow
+  // moves the selections arrays
+  // used in menu after menuSelectionDel
+  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++, k++) {
+    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++, m++) {
+      menuArr[i][j] = arrays.arrowLeft[k][m];
+    }
+  }
+  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++, k++) {
+    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++, m++) {
+      menuArr[i][j] = arrays.arrowRight[k][m];
+    }
+  }
+};
+let position1 = 13;
+let position2 = 60;
+const menuSelectionDel = () => {
+  // clears the selection arrows
+  // used in menu after moving selection
+  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++, k++) {
+    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++, m++) {
+      menuArr[i][j] = ' ';
+    }
+  }
+  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++, k++) {
+    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++, m++) {
+      menuArr[i][j] = ' ';
+    }
+  }
+};
+
+const clearArr = (arr) => {
+  // overwire an array with space
+  // used in menu after option choose
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      arr[i][j] = ' ';
+    }
+  }
+};
+
+// player 1 starter position
+let playerX = 1;
+let playerY = 1;
+// player 2 starter position
+let player2X = 11;
+let player2Y = 23;
+// com1 starter position
+let com1X = 1;
+let com1Y = 23;
+
+let bomb1 = 9;
+let bomb2 = 8;
+let bomb3 = 'B';
+let blindset;
+const keyProcessor = (key) => {
+  if (blindset === 0) {
+    if (key === '\u0020') {
+      switch (position1) {
+        case 13:
+          game();
+          break;
+        case 20:
+          print(optionsFunc());
+          break;
+        case 27:
+          print(creditsFunc());
+          break;
+        case 34:
+          process.exit(0);
+          break;
+      }
+    }
+    if (key === 'w' && position1 > 13) {
+      menuSelectionDel();
+      position1 -= 7;
+      menuSelectionMove();
+      print(menuFunc());
+    }
+    if (key === 's' && position1 < 34) {
+      menuSelectionDel();
+      position1 += 7;
+      menuSelectionMove();
+      print(menuFunc());
+    }
+  }
+  if (blindset === 1) {
+    if (key === 'w' && position1 > 13) {
+      menuSelectionDel();
+      position1 -= 7;
+      menuSelectionMove();
+      print(optionsFunc());
+    }
+    if (key === 's' && position1 < 34) {
+      menuSelectionDel();
+      position1 += 7;
+      menuSelectionMove();
+      print(optionsFunc());
+    }
+    if (key === 'a') {
+      switch (position1) {
+        case 13:
+          soundSwitch = true;
+          print(optionsFunc());
+          break;
+        case 20:
+          mapSwitch = 0;
+          print(optionsFunc());
+          break;
+        case 27:
+          playerSwitch = 0;
+          print(optionsFunc());
+          break;
+      }
+    }
+    if (key === 'd') {
+      switch (position1) {
+        case 13:
+          soundSwitch = false;
+          print(optionsFunc());
+          break;
+        case 20:
+          mapSwitch = 1;
+          print(optionsFunc());
+          break;
+        case 27:
+          playerSwitch = 1;
+          print(optionsFunc());
+          break;
+      }
+    }
+
+    if (key === '\u0020' && position1 === 34) {
+      print(menuFunc());
+    }
+  }
+  if (blindset === 2) {
+    let playerXcanUp;
+    let playerXcanDown;
+    let playerXcanRight;
+    let playerXcanLeft;
+
+    // Where a player can go
+    const arr = ['+', '*', '#', 0, 4, 5, 6, 7];
+
+    if (playerX > 1 && (arr.includes(arrays.smallMap[playerX - 1][playerY]) === true)) { playerXcanUp = true }
+    else { playerXcanUp = false };
+    if (playerX < arrays.smallMap.length - 2 && (arr.includes(arrays.smallMap[playerX + 1][playerY]) === true)) { playerXcanDown = true }
+    else { playerXcanDown = false };
+    if (playerY > 1 && (arr.includes(arrays.smallMap[playerX][playerY - 1]) === true)) { playerXcanLeft = true }
+    else { playerXcanLeft = false };
+    if (playerY < arrays.smallMap[0].length - 2 && (arr.includes(arrays.smallMap[playerX][playerY + 1]) === true)) { playerXcanRight = true }
+    else { playerXcanRight = false };
+
+    let playerYcanUp;
+    let playerYcanDown;
+    let playerYcanRight;
+    let playerYcanLeft;
+
+    if (player2X > 1 && (arr.includes(arrays.smallMap[player2X - 1][player2Y]) === true)) { playerYcanUp = true }
+    else { playerYcanUp = false };
+    if (player2X < arrays.smallMap.length - 2 && (arr.includes(arrays.smallMap[player2X + 1][player2Y]) === true)) { playerYcanDown = true }
+    else { playerYcanDown = false };
+    if (player2Y > 1 && (arr.includes(arrays.smallMap[player2X][player2Y - 1]) === true)) { playerYcanLeft = true }
+    else { playerYcanLeft = false };
+    if (player2Y < arrays.smallMap[0].length - 2 && (arr.includes(arrays.smallMap[player2X][player2Y + 1]) === true)) { playerYcanRight = true }
+    else { playerYcanRight = false };
+
+    let com1XcanUp;
+    let com1XcanDown;
+    let com1XcanRight;
+    let com1XcanLeft;
+
+    if (com1X > 1 && (arr.includes(arrays.smallMap[com1X - 1][com1Y]) === true)) { com1XcanUp = true }
+    else { com1XcanUp = false };
+    if (com1X < arrays.smallMap.length - 2 && (arr.includes(arrays.smallMap[com1X + 1][com1Y]) === true)) { com1XcanDown = true }
+    else { com1XcanDown = false };
+    if (com1Y > 1 && (arr.includes(arrays.smallMap[com1X][com1Y - 1]) === true)) { com1XcanLeft = true }
+    else { com1XcanLeft = false };
+    if (com1Y < arrays.smallMap[0].length - 2 && (arr.includes(arrays.smallMap[com1X][com1Y + 1]) === true)) { com1XcanRight = true }
+    else { com1XcanRight = false };
+
+    let playerXpositionValue = arrays.smallMap[playerX][playerY];
+    let playerYpositionValue = arrays.smallMap[player2X][player2Y];
+    let com1XpositionValue = arrays.smallMap[com1X][com1Y];
+
+    if (key === 'q') {
+      console.clear();
+      print(menuFunc());
+    }
+    if (key === 'w' && playerXcanUp === true) {
+      switch (playerXpositionValue === 9) {
+        case true:
+          arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerX--;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+        case false:
+          arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepower++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerX--;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+      }
+    }
+    if (key === 's' && playerXcanDown === true) {
+      switch (playerXpositionValue === 9) {
+        case true:
+          arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerX++;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+        case false:
+          arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepower++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerX++;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+      }
+    }
+    if (key === 'a' && playerXcanLeft === true) {
+      switch (playerXpositionValue === 9) {
+        case true:
+          arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerY--;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+        case false:
+          arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepower++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerY--;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+      }
+    }
+    if (key === 'd' && playerXcanRight === true) {
+      switch (playerXpositionValue === 9) {
+        case true:
+          arrays.smallMap[playerX][playerY] = 9;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerY++;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+        case false:
+          arrays.smallMap[playerX][playerY] = 0;
+          switch (arrays.boostersMap[playerX][playerY]) {
+            case 4:
+              player1bomb.firepower++;
+              break;
+            case 5:
+              player1.bombs++;
+              break;
+            case 6:
+              player1.pushAbility = true;
+              break;
+            case 7:
+              player1.life++;
+              break;
+          }
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerY++;
+          arrays.smallMap[playerX][playerY] = 'X';
+          break;
+      }
+    }
+    if (key === '8' && playerYcanUp === true) {
+      switch (playerYpositionValue === 8) {
+        case true:
+          arrays.smallMap[player2X][player2Y] = 8;
+          player2X--;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+        case false:
+          arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+              break;
+          }
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2X--;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+      }
+    }
+    if (key === '5' && playerYcanDown === true) {
+      switch (playerYpositionValue === 8) {
+        case true:
+          arrays.smallMap[player2X][player2Y] = 8;
+          player2X++;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+        case false:
+          arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+              break;
+          }
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2X++;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+      }
+    }
+    if (key === '4' && playerYcanLeft === true) {
+      switch (playerYpositionValue === 8) {
+        case true:
+          arrays.smallMap[player2X][player2Y] = 8;
+          player2Y--;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+        case false:
+          arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+              break;
+          }
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2Y--;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+      }
+    }
+    if (key === '6' && playerYcanRight === true) {
+      switch (playerYpositionValue === 8) {
+        case true:
+          arrays.smallMap[player2X][player2Y] = 8;
+          player2Y++;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+        case false:
+          arrays.smallMap[player2X][player2Y] = 0;
+          switch (arrays.boostersMap[player2X][player2Y]) {
+            case 4:
+              player2bomb.firepower++;
+              break;
+            case 5:
+              player2.bombs++;
+              break;
+            case 6:
+              player2.pushAbility = true;
+              break;
+            case 7:
+              player2.life++;
+
+              break;
+          }
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2Y++;
+          arrays.smallMap[player2X][player2Y] = 'Y';
+          break;
+      }
+    }
+    if (key === 'f') {
+      placeBombPlayer1();
+    }
+    if (key === '0') {
+      placeBombPlayer2();
+    }
+  }
+};
+const removeExplosion = () => {
+  for (let i = 0; i < arrays.smallMap.length; i++) {
+    for (let j = 0; j < arrays.smallMap[i].length; j++) {
+      if (arrays.smallMap[i][j] === '*') {
+        arrays.smallMap[i][j] = 0;
+      }
+    }
+  }
+};
+
+ 
+const removeExplosion2 = () => {
+  for (let i = 0; i < arrays.smallMap.length; i++) {
+    for (let j = 0; j < arrays.smallMap[i].length; j++) {
+      if (arrays.smallMap[i][j] === '#') {
+        arrays.smallMap[i][j] = 0;
+      }
+    }
+  }
+};
+
+const removeExplosion3 = () => {
+  for (let i = 0; i < smallMap.length; i++) {
+    for (let j = 0; j < smallMap[i].length; j++) {
+      if (smallMap[i][j] === '+') {
+        smallMap[i][j] = 0;
+      }
+    }
+  }
+};
+
+const placeBombPlayer1 = () => {
+  if (player1.bombs > 0) {
+    arrays.smallMap[playerX][playerY] = bomb1;
+    player1.bombs--;
+    setTimeout(explode1, 2500);
+    setTimeout(removeExplosion, 4000);
+  }
+};
+
+const placeBombPlayer2 = () => {
+  if (player2.bombs > 0) {
+    arrays.smallMap[player2X][player2Y] = bomb2;
+    player2.bombs--;
+    setTimeout(explode2, 2500);
+    setTimeout(removeExplosion2, 4000);
+  }
+};
+
+const placeBombBot1 = () => {
+  if (bot1Bomb > 0) {
+    smallMap[com1X][com1Y] = bomb3;
+    bot1Bomb--;
+    setTimeout(explode3, 2500);
+    setTimeout(removeExplosion3, 4000);
+  }
+};
+
+const game = () => {
+  blindset = 2;
+  setTimeout(function run() {
+    boosters(smallMap);
+    print(largeMapGen(arrays.smallMap));
+    if (blindset === 2) {
+      setTimeout(run, 100);
+    }
+    if (blindset === 0) {
+      console.clear();
+      print(menuFunc());
+    }
+  }, 100);
+}
+
+const menuFuncAssistant = (y, x, array) => {
+  for (let i = y, k = 0; k < array.length; i++, k++) {
+    for (let j = x, m = 0; m < array[k].length; j++, m++) {
+      menuArr[i][j] = array[k][m];
+    }
+  }
+};
+
+const menuFunc = () => {
+  blindset = 0;
+  clearArr(menuArr);
+  menuFuncAssistant(4, 60, arrays.bombermanArr);
+  menuFuncAssistant(13, 82, arrays.playArr);
+  menuFuncAssistant(20, 73, arrays.optionsArr);
+  menuFuncAssistant(27, 74, arrays.creditsArr);
+  menuFuncAssistant(34, 81, arrays.exitArr);
+  menuFuncAssistant(position1, position2 + 62, arrays.arrowRight);
+  menuFuncAssistant(position1, position2, arrays.arrowLeft);
+  return menuArr;
+}
+
+let soundSwitch = true;
+let mapSwitch = 0;
+let playerSwitch = 0;
+const optionsFunc = () => {
+  blindset = 1;
+  console.clear();
+  clearArr(menuArr);
+  menuFuncAssistant(4, 60, arrays.bombermanArr);
+  menuFuncAssistant(13, 60, arrays.soundArr);
+
+  switch (soundSwitch) {
+    case true:
+      menuFuncAssistant(13, 109, arrays.onArr);
+      break;
+    case false:
+      menuFuncAssistant(13, 109, arrays.offArr);
+      break;
+  };
+  menuFuncAssistant(20, 60, arrays.mapArr);
+  switch (mapSwitch) {
+    case 0:
+      menuFuncAssistant(20, 92, arrays.defaultArr);
+      break;
+    case 1:
+      menuFuncAssistant(20, 88, arrays.randomArr);
+      break;
+  }
+  menuFuncAssistant(27, 60, arrays.playersArr);
+  switch (playerSwitch) {
+    case 0:
+      menuFuncAssistant(27, 111, arrays.twoArr);
+      break;
+    case 1:
+      menuFuncAssistant(27, 111, arrays.oneArr);
+      break;
+  }
+  menuFuncAssistant(34, 81, arrays.backArr);
+  menuFuncAssistant(position1, position2 + 78, arrays.arrowRight);
+  menuFuncAssistant(position1, position2 - 14, arrays.arrowLeft);
+  return menuArr;
+}
+const creditsFunc = () => {
+  let stopInterval = setInterval(() => { print(credistFuncInner()) }, 250);
+  const credistFuncInner = () => {
+    menuArr.splice(0, 1);
+    menuArr.push(arrays.creatorsArr[0]);
+    arrays.creatorsArr.splice(0, 1);
+    print(menuArr);
+    if (arrays.creatorsArr.length === 1) {
+      clearInterval(stopInterval);
+      stopInterval = 0;
+      print(menuFunc());
+    }
+    return menuArr;
+  }
+  return menuArr;
+};
+
+const PRESENT_FirePower = 4;
+const PRESENT_PlusBomb = 5;
+const PRESENT_PushTheBomb = 6;
+const PRESENT_ExtraLife = 7;
+
+const PRESENTS = [PRESENT_FirePower, PRESENT_PlusBomb, PRESENT_PushTheBomb, PRESENT_ExtraLife];
+
+const boosterGenerator = (sourceMap) => {
+  for (let i = 0; i < sourceMap.length; i++) {
+    for (let j = 0; j < sourceMap[i].length; j++) {
+      if (sourceMap[i][j] === 1) {
+        getRandomInt(0, 12);
+        if (GeneratedBoosterNUmber <= 3) {
+          arrays.boostersMap[i][j] = PRESENTS[GeneratedBoosterNUmber];
+        }
+      }
+    }
+  }
+  return arrays.boostersMap;
+};
+
+let GeneratedBoosterNUmber;
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  GeneratedBoosterNUmber = Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const boosters = (sourceMap) => {
+  for (let i = 0; i < sourceMap.length; i++) {
+    for (let j = 0; j < sourceMap[i].length; j++) {
+      if (sourceMap[i][j] === 0 && (arrays.boostersMap[i][j] === 4 || arrays.boostersMap[i][j] === 5 || arrays.boostersMap[i][j] === 6 || arrays.boostersMap[i][j] === 7)) {
+        sourceMap[i][j] = arrays.boostersMap[i][j];
+      }
+    }
+  }
+  return sourceMap;
+};
 
 
 module.exports = {
   print,
   largeMapGen,
   generatedMap,
+  menuArrGen,
+  menuSelectionMove,
+  menuSelectionDel,
+  clearArr,
   explode1,
   explode2,
   explode3,
-  smallMap
+  boosterGenerator,
+  removeExplosion,
+  removeExplosion2,
+  removeExplosion3,
+  placeBombPlayer1,
+  placeBombPlayer2,
+  placeBombBot1,
+  keyProcessor,
+  game,
+  menuFunc,
+  optionsFunc,
+  creditsFunc,
+  boosters
 };
