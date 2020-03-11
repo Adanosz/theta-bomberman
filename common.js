@@ -148,6 +148,7 @@ const explode1 = () => {
     player2.life--
   } player1.bombs++;
 };
+
 const explode2 = () => {
   for (let i = 0; i < 4; i++) {
     switch (direction) {
@@ -995,7 +996,7 @@ const game = () => {
     }
     console.log('p1 life =(', player1.life, ')', 'p1 bombs =(',player1.bombs, ')', 'p1 can push =(', player1.pushAbility,')', 'p1 firepower =(', player1bomb.firepower, ')', smallMap[playerX][playerY]);
   }, 100);
-}
+};
 
 const menuFuncAssistant = (y, x, array) => {
   for (let i = y, k = 0; k < array.length; i++, k++) {
@@ -1016,7 +1017,7 @@ const menuFunc = () => {
   menuFuncAssistant(position1, position2 + 62, arrays.arrowRight);
   menuFuncAssistant(position1, position2, arrays.arrowLeft);
   return menuArr;
-}
+};
 
 let soundSwitch = true;
 let mapSwitch = 0;
@@ -1058,7 +1059,7 @@ const optionsFunc = () => {
   menuFuncAssistant(position1, position2 + 78, arrays.arrowRight);
   menuFuncAssistant(position1, position2 - 14, arrays.arrowLeft);
   return menuArr;
-}
+};
 const creditsFunc = () => {
   let stopInterval = setInterval(() => { print(credistFuncInner()) }, 250);
   const credistFuncInner = () => {
