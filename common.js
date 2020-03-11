@@ -32,7 +32,7 @@ let player2bomb = {
   coordY: 0
 };
 
-let brokeable = [0, 1, 'X', 'Y'];
+let brokeable = [0, 1, 'X', 'Y', 4, 5, 6, 7];
 let direction = 'up';
 const explode1 = () => {
   for (let i = 0; i < 4; i++) {
@@ -732,8 +732,7 @@ const keyProcessor = (key) => {
     }
     if (key === '0') {
       placeBombPlayer2();
-      player2bomb.coordX = player2X;
-      player2bomb.coordY = player2Y;
+      bombObjCreator(bombStorageY, player2X, player2Y);
     }
   }
 };
@@ -802,7 +801,7 @@ const placeBombPlayer2 = () => {
   if (player2.bombs > 0) {
     arrays.smallMap[player2X][player2Y] = bomb2;
     player2.bombs--;
-    setTimeout(explode2, 2500);
+    // setTimeout(explode2, 2500);
     setTimeout(removeExplosion2, 4000);
   }
 };
