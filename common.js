@@ -29,50 +29,51 @@ let player2bomb = {
 };
 
 let explodeRange = 1;
-const explode1 = () => {
+const explode1 = (bombX, bombY) => {
   // This function is for the bomb explosion. If there is a destructible object next to a bomb,
   // then it will be vanish.
   for (let i = 0; i < smallMap.length; i++) {
     for (let j = 0; j < smallMap[i].length; j++) {
-      if (smallMap[i][j] === 9 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
-        smallMap[i + explodeRange][j] = '*';
-      }
-      if (smallMap[i][j] === 9 && (smallMap[i - 1][j] === 1 || smallMap[i - 1][j] === 0 || smallMap[i - 1][j] === 'X' || smallMap[i - 1][j] === 'Y')) {
-        smallMap[i - explodeRange][j] = '*';
-      }
-      if (smallMap[i][j] === 9 && (smallMap[i][j + 1] === 1 || smallMap[i][j + 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j + 1] === 'Y')) {
-        smallMap[i][j + explodeRange] = '*';
-      }
-      if (smallMap[i][j] === 9 && (smallMap[i][j - 1] === 1 || smallMap[i][j - 1] === 0 || smallMap[i][j - 1] === 'X' || smallMap[i][j - 1] === 'Y')) {
-        smallMap[i][j - explodeRange] = '*';
-      }
-      if (smallMap[i][j] === 9) {
-        smallMap[i][j] = '*';
+      // if (i === bombX && j === bombY) {
+        if (smallMap[i][j] === 9 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
+          smallMap[i + explodeRange][j] = '*';
+        }
+        if (smallMap[i][j] === 9 && (smallMap[i - 1][j] === 1 || smallMap[i - 1][j] === 0 || smallMap[i - 1][j] === 'X' || smallMap[i - 1][j] === 'Y')) {
+          smallMap[i - explodeRange][j] = '*';
+        }
+        if (smallMap[i][j] === 9 && (smallMap[i][j + 1] === 1 || smallMap[i][j + 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j + 1] === 'Y')) {
+          smallMap[i][j + explodeRange] = '*';
+        }
+        if (smallMap[i][j] === 9 && (smallMap[i][j - 1] === 1 || smallMap[i][j - 1] === 0 || smallMap[i][j - 1] === 'X' || smallMap[i][j - 1] === 'Y')) {
+          smallMap[i][j - explodeRange] = '*';
+        }
+        if (smallMap[i][j] === 9) {
+          smallMap[i][j] = '*';
+       // }
       }
     }
   } player1.bombs++;
 };
 
-const explode2 = () => {
-  /*   let obj = { key1: 3, key2: 1, time: 1231321 };
-    arr */
+const explode2 = (bombX, bombY) => {
   for (let i = 0; i < smallMap.length; i++) {
     for (let j = 0; j < smallMap[i].length; j++) {
-      if (smallMap[i][j] === 8 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
-        smallMap[i + explodeRange][j] = '#';
-      }
-      if (smallMap[i][j] === 8 && (smallMap[i - 1][j] === 1 || smallMap[i - 1][j] === 0 || smallMap[i - 1][j] === 'X' || smallMap[i - 1][j] === 'Y')) {
-        smallMap[i - explodeRange][j] = '#';
-      }
-      if (smallMap[i][j] === 8 && (smallMap[i][j + 1] === 1 || smallMap[i][j + 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j + 1] === 'Y')) {
-        smallMap[i][j + explodeRange] = '#';
-      }
-      if (smallMap[i][j] === 8 && (smallMap[i][j - 1] === 1 || smallMap[i][j - 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j - 1] === 'Y')) {
-        smallMap[i][j - explodeRange] = '#';
-      }
-      if (smallMap[i][j] === 8) {
-        smallMap[i][j] = '#';
-      }
+      // if (i === bombX && j === bombY) {
+        if (smallMap[i][j] === 8 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
+          smallMap[i + explodeRange][j] = '#';
+        }
+        if (smallMap[i][j] === 8 && (smallMap[i - 1][j] === 1 || smallMap[i - 1][j] === 0 || smallMap[i - 1][j] === 'X' || smallMap[i - 1][j] === 'Y')) {
+          smallMap[i - explodeRange][j] = '#';
+        }
+        if (smallMap[i][j] === 8 && (smallMap[i][j + 1] === 1 || smallMap[i][j + 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j + 1] === 'Y')) {
+          smallMap[i][j + explodeRange] = '#';
+        }
+        if (smallMap[i][j] === 8 && (smallMap[i][j - 1] === 1 || smallMap[i][j - 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j - 1] === 'Y')) {
+          smallMap[i][j - explodeRange] = '#';
+        }
+        if (smallMap[i][j] === 8) {
+          smallMap[i][j] = '#';
+      
     }
   } player2.bombs++;
 };
@@ -321,7 +322,7 @@ const keyProcessor = (key) => {
     let playerXcanLeft;
 
     // Where a player can go
-    const arr = ['*', '#', 0, 4, 5, 6, 7];
+    const arr = ['*', '#', 0, 4, 5, 6, 7, 'Y', 'X'];
 
     if (playerX > 1 && (arr.includes(arrays.smallMap[playerX - 1][playerY]) === true)) { playerXcanUp = true }
     else { playerXcanUp = false };
@@ -363,6 +364,9 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerX--;
+          arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
               player1bomb.firepower++;
@@ -378,8 +382,6 @@ const keyProcessor = (key) => {
               break;
           }
           arrays.boostersMap[playerX][playerY] = 0;
-          playerX--;
-          arrays.smallMap[playerX][playerY] = 'X';
           break;
       }
     }
@@ -393,6 +395,9 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerX++;
+          arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
               player1bomb.firepower++;
@@ -408,8 +413,6 @@ const keyProcessor = (key) => {
               break;
           }
           arrays.boostersMap[playerX][playerY] = 0;
-          playerX++;
-          arrays.smallMap[playerX][playerY] = 'X';
           break;
       }
     }
@@ -423,6 +426,9 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerY--;
+          arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
               player1bomb.firepower++;
@@ -438,8 +444,6 @@ const keyProcessor = (key) => {
               break;
           }
           arrays.boostersMap[playerX][playerY] = 0;
-          playerY--;
-          arrays.smallMap[playerX][playerY] = 'X';
           break;
       }
     }
@@ -453,6 +457,9 @@ const keyProcessor = (key) => {
           break;
         case false:
           arrays.smallMap[playerX][playerY] = 0;
+          arrays.boostersMap[playerX][playerY] = 0;
+          playerY++;
+          arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
               player1bomb.firepower++;
@@ -468,8 +475,6 @@ const keyProcessor = (key) => {
               break;
           }
           arrays.boostersMap[playerX][playerY] = 0;
-          playerY++;
-          arrays.smallMap[playerX][playerY] = 'X';
           break;
       }
     }
@@ -477,11 +482,15 @@ const keyProcessor = (key) => {
       switch (playerYpositionValue === 8) {
         case true:
           arrays.smallMap[player2X][player2Y] = 8;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2X--;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2X--;
+          arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
               player2bomb.firepower++;
@@ -497,8 +506,6 @@ const keyProcessor = (key) => {
               break;
           }
           arrays.boostersMap[player2X][player2Y] = 0;
-          player2X--;
-          arrays.smallMap[player2X][player2Y] = 'Y';
           break;
       }
     }
@@ -506,11 +513,15 @@ const keyProcessor = (key) => {
       switch (playerYpositionValue === 8) {
         case true:
           arrays.smallMap[player2X][player2Y] = 8;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2X++;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2X++;
+          arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
               player2bomb.firepower++;
@@ -526,8 +537,6 @@ const keyProcessor = (key) => {
               break;
           }
           arrays.boostersMap[player2X][player2Y] = 0;
-          player2X++;
-          arrays.smallMap[player2X][player2Y] = 'Y';
           break;
       }
     }
@@ -535,11 +544,15 @@ const keyProcessor = (key) => {
       switch (playerYpositionValue === 8) {
         case true:
           arrays.smallMap[player2X][player2Y] = 8;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2Y--;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2Y--;
+          arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
               player2bomb.firepower++;
@@ -555,8 +568,6 @@ const keyProcessor = (key) => {
               break;
           }
           arrays.boostersMap[player2X][player2Y] = 0;
-          player2Y--;
-          arrays.smallMap[player2X][player2Y] = 'Y';
           break;
       }
     }
@@ -564,11 +575,15 @@ const keyProcessor = (key) => {
       switch (playerYpositionValue === 8) {
         case true:
           arrays.smallMap[player2X][player2Y] = 8;
+          arrays.boostersMap[player2X][player2Y] = 0;
           player2Y++;
           arrays.smallMap[player2X][player2Y] = 'Y';
           break;
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
+          arrays.boostersMap[player2X][player2Y] = 0;
+          player2Y++;
+          arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
               player2bomb.firepower++;
@@ -581,12 +596,9 @@ const keyProcessor = (key) => {
               break;
             case 7:
               player2.life++;
-
               break;
           }
           arrays.boostersMap[player2X][player2Y] = 0;
-          player2Y++;
-          arrays.smallMap[player2X][player2Y] = 'Y';
           break;
       }
     }
@@ -598,6 +610,7 @@ const keyProcessor = (key) => {
     }
   }
 };
+
 const removeExplosion = () => {
   for (let i = 0; i < arrays.smallMap.length; i++) {
     for (let j = 0; j < arrays.smallMap[i].length; j++) {
@@ -622,7 +635,8 @@ const placeBombPlayer1 = () => {
   if (player1.bombs > 0) {
     arrays.smallMap[playerX][playerY] = bomb1;
     player1.bombs--;
-    setTimeout(explode1, 2500);
+    // setTimeout (() => {
+    //  explode1 (playerX, playerY), 2500});
     setTimeout(removeExplosion, 4000);
   }
 };
