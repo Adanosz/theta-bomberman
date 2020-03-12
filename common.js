@@ -953,11 +953,11 @@ const placeBombPlayer2 = () => {
 };
 
 const lifeCheckerPro = () => {
-  if(player1.life === 0) {
+  if(player1.life <= 0) {
     console.log('Game over! Player1 has died, Player2 has won!')
     setTimeout(() => {process.exit(0)}, 250);
   }
-  if (player2.life === 0) {
+  if (player2.life <= 0) {
     console.log('Game over! Player2 has died, Player1 has won!')
     setTimeout(() => {process.exit(0)}, 250);
   }
