@@ -14,14 +14,13 @@ stdin.setEncoding('utf8');
 stdin.on('data', common.keyProcessor);
 let smallMap = arrays.smallMap;
 arrays.smallMap = common.generatedMap(arrays.smallMap);
-player.play("sounds/background.mp3");
+
+
 
 let menuArr = common.menuArrGen();
 common.clearArr(menuArr);
 arrays.boostersMap = common.boosterGenerator(smallMap);
 common.print(common.menuFunc());
-
-
 
 
 /*const up = () => {

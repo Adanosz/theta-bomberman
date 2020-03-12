@@ -3,6 +3,7 @@ const arrays = require('./arrays.js');
 let mpg = require('mpg123');
 let player = new mpg.MpgPlayer();
 
+
 const print = (printable) => {
   // print an array as string, per line
   // used everywhere
@@ -38,6 +39,7 @@ let player2bomb = {
 let brokeable = [0, 1, 'X', 'Y', 4, 5, 6, 7];
 let direction = 'up';
 const explode1 = () => {
+  // player.pause("sounds/background.mp3");
   player.play("sounds/bomb2.mp3");
   for (let i = 0; i < 4; i++) {
     switch (direction) {
@@ -154,7 +156,7 @@ const explode1 = () => {
 };
 
 const explode2 = () => {
-  player.play("sounds/bomb2.mp3")
+  player.play("sounds/bomb2.mp3");
   for (let i = 0; i < 4; i++) {
     switch (direction) {
       case 'up':
@@ -227,7 +229,7 @@ const explode2 = () => {
   if (smallMap[player2bomb.coordX][player2bomb.coordY] === smallMap[playerX][playerY]) {
     player1.life--
   }
-  
+
   if (smallMap[player2bomb.coordX][player2bomb.coordY] === smallMap[player2X][player2Y]) {
     player2.life--
   }
@@ -241,7 +243,7 @@ const explRemove1 = () => {
     switch (direction) {
       case 'up':
         for (let f = 1; f <= player1bomb.firepower; f++) {
-          if (makeItHappen.includes(smallMap[player1bomb.coordX - f][player1bomb.coordY])  === true) {
+          if (makeItHappen.includes(smallMap[player1bomb.coordX - f][player1bomb.coordY]) === true) {
             smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0;
           } else {
             direction = 'right';
@@ -396,8 +398,8 @@ const largeMapGen = (smallMap) => {
   // convert smallMap indexes into 8x4 array
   let position1 = 0;
   let position2 = 0;
-  for (let i = 0, a = position1; i < smallMap.length; i++, a += 4) {
-    for (let j = 0, b = position2; j < smallMap[i].length; j++, b += 8) {
+  for (let i = 0, a = position1; i < smallMap.length; i++ , a += 4) {
+    for (let j = 0, b = position2; j < smallMap[i].length; j++ , b += 8) {
       const largeMapGenAssistant = (type) => {
         for (let i = 0; i < 4; i++) {
           for (let j = 0; j < 8; j++) {
@@ -455,7 +457,7 @@ const largeMapGen = (smallMap) => {
   board.splice(0, 3);
   board.splice(-4, 3);
   for (let i = 0; i < 6; i++) {
-    for (let i = 0, j = 0; i < board.length; i++, j++) {
+    for (let i = 0, j = 0; i < board.length; i++ , j++) {
       board[i].pop();
       board[j].shift();
     }
@@ -494,13 +496,13 @@ let menuArr = menuArrGen();
 const menuSelectionMove = () => { // leftArrow, rightArrow
   // moves the selections arrays
   // used in menu after menuSelectionDel
-  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++, k++) {
-    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++, m++) {
+  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++ , k++) {
+    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++ , m++) {
       menuArr[i][j] = arrays.arrowLeft[k][m];
     }
   }
-  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++, k++) {
-    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++, m++) {
+  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++ , k++) {
+    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++ , m++) {
       menuArr[i][j] = arrays.arrowRight[k][m];
     }
   }
@@ -510,13 +512,13 @@ let position2 = 60;
 const menuSelectionDel = () => {
   // clears the selection arrows
   // used in menu after moving selection
-  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++, k++) {
-    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++, m++) {
+  for (let i = position1, k = 0; k < arrays.arrowLeft.length; i++ , k++) {
+    for (let j = position2, m = 0; m < arrays.arrowLeft[k].length; j++ , m++) {
       menuArr[i][j] = ' ';
     }
   }
-  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++, k++) {
-    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++, m++) {
+  for (let i = position1, k = 0; k < arrays.arrowRight.length; i++ , k++) {
+    for (let j = position2 + 62, m = 0; m < arrays.arrowRight[k].length; j++ , m++) {
       menuArr[i][j] = ' ';
     }
   }
@@ -982,7 +984,7 @@ const keyProcessor = (key) => {
         case false:
           arrays.smallMap[player2X][player2Y] = 0;
           arrays.boostersMap[player2X][player2Y] = 0;
-          if (smallMap[player2X][player2Y + 1] === '*'|| smallMap[player2X][player2Y + 1] === '#') {
+          if (smallMap[player2X][player2Y + 1] === '*' || smallMap[player2X][player2Y + 1] === '#') {
             player2.life--
           }
           player2Y++;
@@ -1013,7 +1015,7 @@ const keyProcessor = (key) => {
       placeBombPlayer1();
     }
     if (key === '0') {
-      placeBombPlayer2();      
+      placeBombPlayer2();
     }
   }
 };
@@ -1126,13 +1128,13 @@ const game = () => {
       console.clear();
       print(menuFunc());
     }
-    console.log('P1 life =(', player1.life, ')', 'P1 bombs =(',player1.bombs, ')', 'P1 can push =(', player1.pushAbility,')', 'P1 firepower =(', player1bomb.firepower, ')', smallMap[playerX][playerY], '                                  ', 'P2 life =(', player2.life, ')', 'P2 bombs =(',player2.bombs, ')', 'P2 can push =(', player2.pushAbility,')', 'P2 firepower =(', player2bomb.firepower, ')', smallMap[player2X][player2Y]);
+    console.log('P1 life =(', player1.life, ')', 'P1 bombs =(', player1.bombs, ')', 'P1 can push =(', player1.pushAbility, ')', 'P1 firepower =(', player1bomb.firepower, ')', smallMap[playerX][playerY], '                                  ', 'P2 life =(', player2.life, ')', 'P2 bombs =(', player2.bombs, ')', 'P2 can push =(', player2.pushAbility, ')', 'P2 firepower =(', player2bomb.firepower, ')', smallMap[player2X][player2Y]);
   }, 100);
 };
 
 const menuFuncAssistant = (y, x, array) => {
-  for (let i = y, k = 0; k < array.length; i++, k++) {
-    for (let j = x, m = 0; m < array[k].length; j++, m++) {
+  for (let i = y, k = 0; k < array.length; i++ , k++) {
+    for (let j = x, m = 0; m < array[k].length; j++ , m++) {
       menuArr[i][j] = array[k][m];
     }
   }
@@ -1247,6 +1249,8 @@ const boosters = (sourceMap) => {
   }
   return sourceMap;
 };
+
+// player.play("sounds/background.mp3");
 
 module.exports = {
   print,
