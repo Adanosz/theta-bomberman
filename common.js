@@ -42,18 +42,10 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX - f][player1bomb.coordY]) === true) {
             if (smallMap[player1bomb.coordX - f][player1bomb.coordY] === 1) {
               smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*'
-              /* setTimeout((() => { if (smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*') {
-                smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0
-              }
-            }), 1000) */
               direction = 'right';
               break;
             }
             smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*';
-            /* setTimeout((() => { if (smallMap[player1bomb.coordX - f][player1bomb.coordY] = '*') {
-              smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0
-            }
-          }), 1000) */
           } else {
             direction = 'right';
             break;
@@ -66,18 +58,10 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX][player1bomb.coordY + f]) === true) {
             if (smallMap[player1bomb.coordX][player1bomb.coordY + f] === 1) {
               smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*'
-              /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*') {
-                smallMap[player1bomb.coordX][player1bomb.coordY + f] = 0
-              }
-            }), 1000) */
               direction = 'down';
               break;
             }
             smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*';
-            /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY + f] = '*') {
-              smallMap[player1bomb.coordX][player1bomb.coordY + f] = 0
-            }
-          }), 1000) */
           } else {
             direction = 'down';
             break;
@@ -90,18 +74,10 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX + f][player1bomb.coordY]) === true) {
             if (smallMap[player1bomb.coordX + f][player1bomb.coordY] === 1) {
               smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*'
-              /* setTimeout((() => { if (smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*') {
-                smallMap[player1bomb.coordX + f][player1bomb.coordY] = 0
-              }
-            }), 1000) */
               direction = 'left';
               break;
             }
             smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*';
-            /* setTimeout((() => { if (smallMap[player1bomb.coordX + f][player1bomb.coordY] = '*') {
-              smallMap[player1bomb.coordX + f][player1bomb.coordY] = 0
-            }
-          }), 1000) */
           } else {
             direction = 'left';
             break;
@@ -114,18 +90,10 @@ const explode1 = () => {
           if (brokeable.includes(smallMap[player1bomb.coordX][player1bomb.coordY - f]) === true) {
             if (smallMap[player1bomb.coordX][player1bomb.coordY - f] === 1) {
               smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*'
-              /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*') {
-                smallMap[player1bomb.coordX][player1bomb.coordY - f] = 0
-              }
-            }), 1000) */
               direction = 'up';
               break;
             }
             smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*';
-            /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY - f] = '*') {
-              smallMap[player1bomb.coordX][player1bomb.coordY - f] = 0
-            }
-          }), 1000) */
           } else {
             direction = 'up';
             break;
@@ -137,10 +105,6 @@ const explode1 = () => {
   }
 
   smallMap[player1bomb.coordX][player1bomb.coordY] = '*';
-  /* setTimeout((() => { if (smallMap[player1bomb.coordX][player1bomb.coordY] = '*') {
-    smallMap[player1bomb.coordX][player1bomb.coordY] = 0
-  }
-}), 1500) */
   if (smallMap[player1bomb.coordX][player1bomb.coordY] === smallMap[playerX][playerY]) {
     player1.life--
   }
@@ -334,28 +298,6 @@ const explRemove2 = () => {
   }
   smallMap[player2bomb.coordX][player2bomb.coordY] = 0;
 }
-
-const oldexplode2 = () => {
-  for (let i = 0; i < smallMap.length; i++) {
-    for (let j = 0; j < smallMap[i].length; j++) {
-      if (smallMap[i][j] === 8 && (smallMap[i + 1][j] === 1 || smallMap[i + 1][j] === 0 || smallMap[i + 1][j] === 'X' || smallMap[i + 1][j] === 'Y')) {
-        smallMap[i + explodeRange][j] = '#';
-      }
-      if (smallMap[i][j] === 8 && (smallMap[i - 1][j] === 1 || smallMap[i - 1][j] === 0 || smallMap[i - 1][j] === 'X' || smallMap[i - 1][j] === 'Y')) {
-        smallMap[i - explodeRange][j] = '#';
-      }
-      if (smallMap[i][j] === 8 && (smallMap[i][j + 1] === 1 || smallMap[i][j + 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j + 1] === 'Y')) {
-        smallMap[i][j + explodeRange] = '#';
-      }
-      if (smallMap[i][j] === 8 && (smallMap[i][j - 1] === 1 || smallMap[i][j - 1] === 0 || smallMap[i][j + 1] === 'X' || smallMap[i][j - 1] === 'Y')) {
-        smallMap[i][j - explodeRange] = '#';
-      }
-      if (smallMap[i][j] === 8) {
-        smallMap[i][j] = '#';
-      }
-    }
-  } player2.bombs++;
-};
 
 const largeMapGen = (smallMap) => {
   // make a 200x52 array, will be spliced to 176x44
@@ -1010,6 +952,16 @@ const placeBombPlayer2 = () => {
   }
 };
 
+const lifeCheckerPro = () => {
+  if(player1.life === 0) {
+    console.log('Game over! Player1 has died, Player2 has won!')
+    setTimeout(() => {process.exit(0)}, 250);
+  }
+  if (player2.life === 0) {
+    console.log('Game over! Player2 has died, Player1 has won!')
+    setTimeout(() => {process.exit(0)}, 250);
+  }
+}
 const game = () => {
   blindset = 2;
   setTimeout(function run() {
@@ -1023,6 +975,7 @@ const game = () => {
     bombTimeChecker(player2bomb, bombStorageY, explode2);
     bombExplRemTimeChecker(player1bomb, bombExplTStorageX, explRemove1);
     bombExplRemTimeChecker(player2bomb, bombExplTStorageY, explRemove2);
+    lifeCheckerPro();
 
     if (blindset === 2) {
       setTimeout(run, 100);
@@ -1031,7 +984,7 @@ const game = () => {
       console.clear();
       print(menuFunc());
     }
-    console.log('P1 life =(', player1.life, ')', 'P1 bombs =(',player1.bombs, ')', 'P1 can push =(', player1.pushAbility,')', 'P1 firepower =(', player1bomb.firepower, ')', smallMap[playerX][playerY], '                                  ', 'P2 life =(', player2.life, ')', 'P2 bombs =(',player2.bombs, ')', 'P2 can push =(', player2.pushAbility,')', 'P2 firepower =(', player2bomb.firepower, ')', smallMap[player2X][player2Y]);
+    console.log('Player1 Life =(', player1.life, ')', 'Bombs =(',player1.bombs, ')', 'Firepower =(', player1bomb.firepower, ')', '                                                                                        ', 'Player2 Life =(', player2.life, ')', 'Bombs =(',player2.bombs, ')', 'Firepower =(', player2bomb.firepower, ')');
   }, 100);
 };
 
@@ -1116,10 +1069,10 @@ const creditsFunc = () => {
 
 const PRESENT_FirePower = 4;
 const PRESENT_PlusBomb = 5;
-const PRESENT_PushTheBomb = 6;
+// const PRESENT_PushTheBomb = 6;
 const PRESENT_ExtraLife = 7;
 
-const PRESENTS = [PRESENT_FirePower, PRESENT_PlusBomb, PRESENT_PushTheBomb, PRESENT_ExtraLife];
+const PRESENTS = [PRESENT_FirePower, PRESENT_PlusBomb, PRESENT_ExtraLife, PRESENT_ExtraLife];
 
 const boosterGenerator = (sourceMap) => {
   for (let i = 0; i < sourceMap.length; i++) {
@@ -1145,7 +1098,7 @@ const getRandomInt = (min, max) => {
 const boosters = (sourceMap) => {
   for (let i = 0; i < sourceMap.length; i++) {
     for (let j = 0; j < sourceMap[i].length; j++) {
-      if (sourceMap[i][j] === 0 && (arrays.boostersMap[i][j] === 4 || arrays.boostersMap[i][j] === 5 || arrays.boostersMap[i][j] === 6 || arrays.boostersMap[i][j] === 7)) {
+      if (sourceMap[i][j] === 0 && (arrays.boostersMap[i][j] === 4 || arrays.boostersMap[i][j] === 5 || arrays.boostersMap[i][j] === 7)) {
         sourceMap[i][j] = arrays.boostersMap[i][j];
       }
     }
@@ -1164,8 +1117,6 @@ module.exports = {
   explode1,
   explode2,
   boosterGenerator,
-  // removeExplosion,
-  // removeExplosion2,
   placeBombPlayer1,
   placeBombPlayer2,
   keyProcessor,
