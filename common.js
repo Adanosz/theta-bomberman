@@ -930,10 +930,14 @@ const keyProcessor = (key) => {
       }
     }
     if (key === 'f') {
-      placeBombPlayer1();
+      if (smallMap[playerX][playerY] !== 9) {
+        placeBombPlayer1();
+      }
     }
     if (key === '0') {
-      placeBombPlayer2();      
+      if (smallMap[player2X][player2Y] !== 8) {
+        placeBombPlayer2();
+      }    
     }
   }
 };
@@ -990,7 +994,7 @@ const bombTimeChecker = (player, storage, explode) => {
 const placeBombPlayer1 = () => {
   if (player1.bombs > 0) {
     arrays.smallMap[playerX][playerY] = bomb1;
-    arrays.boostersMap[playerX][playerY] = 'X'
+    arrays.boostersMap[playerX][playerY] = arrays.freeSpace;
     player1.bombs--;
     bombObjCreator(bombStorageX, playerX, playerY);
     bombObjCreator(bombExplTStorageX, playerX, playerY);
