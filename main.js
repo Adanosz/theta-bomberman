@@ -1,14 +1,20 @@
 const common = require('./common.js');
 const arrays = require('./arrays.js');
 
+
+let mpg = require('mpg123');
+let player = new mpg.MpgPlayer();
+
+
+
 const stdin = process.stdin;
 stdin.setRawMode(true);
 stdin.resume();
 stdin.setEncoding('utf8');
-
 stdin.on('data', common.keyProcessor);
 let smallMap = arrays.smallMap;
 arrays.smallMap = common.generatedMap(arrays.smallMap);
+player.play("sounds/background.mp3");
 
 let menuArr = common.menuArrGen();
 common.clearArr(menuArr);
@@ -18,7 +24,7 @@ common.print(common.menuFunc());
 
 
 
-const up = () => {
+/*const up = () => {
   if (com1X > 1 && smallMap[com1X - 1][com1Y] === 0) {
     // console.clear();
     smallMap[com1X][com1Y] = 0;
@@ -110,4 +116,4 @@ setTimeout(function botmove() {
 }, 1000);
 
 
-
+*/
