@@ -581,7 +581,6 @@ let com1Y = 23;
 
 let bomb1 = 9;
 let bomb2 = 8;
-let bomb3 = 'B';
 let blindset;
 const keyProcessor = (key) => {
   if (blindset === 0) {
@@ -1206,6 +1205,7 @@ const menuFuncAssistant = (y, x, array) => {
 };
 
 const menuFunc = () => {
+  player.play("sounds/menuclick.mp3");
   blindset = 0;
   clearArr(menuArr);
   menuFuncAssistant(4, 60, arrays.bombermanArr);
@@ -1222,6 +1222,7 @@ let soundSwitch = true;
 let mapSwitch = 0;
 let playerSwitch = 0;
 const optionsFunc = () => {
+  player.play("sounds/menuclick.mp3");
   blindset = 1;
   console.clear();
   clearArr(menuArr);
