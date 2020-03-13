@@ -579,23 +579,8 @@ const keyProcessor = (key) => {
     if (player2Y < arrays.smallMap[0].length - 2 && (arr.includes(arrays.smallMap[player2X][player2Y + 1]) === true)) { playerYcanRight = true }
     else { playerYcanRight = false };
 
-    let com1XcanUp;
-    let com1XcanDown;
-    let com1XcanRight;
-    let com1XcanLeft;
-
-    if (com1X > 1 && (arr.includes(arrays.smallMap[com1X - 1][com1Y]) === true)) { com1XcanUp = true }
-    else { com1XcanUp = false };
-    if (com1X < arrays.smallMap.length - 2 && (arr.includes(arrays.smallMap[com1X + 1][com1Y]) === true)) { com1XcanDown = true }
-    else { com1XcanDown = false };
-    if (com1Y > 1 && (arr.includes(arrays.smallMap[com1X][com1Y - 1]) === true)) { com1XcanLeft = true }
-    else { com1XcanLeft = false };
-    if (com1Y < arrays.smallMap[0].length - 2 && (arr.includes(arrays.smallMap[com1X][com1Y + 1]) === true)) { com1XcanRight = true }
-    else { com1XcanRight = false };
-
     let playerXpositionValue = arrays.smallMap[playerX][playerY];
     let playerYpositionValue = arrays.smallMap[player2X][player2Y];
-    let com1XpositionValue = arrays.smallMap[com1X][com1Y];
 
     if (key === 'q') {
       console.clear();
@@ -622,19 +607,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.life++;
               break;
           }
@@ -663,19 +648,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.life++;
               break;
           }
@@ -704,19 +689,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.life++;
               break;
           }
@@ -745,19 +730,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[playerX][playerY] = 'X';
           switch (arrays.boostersMap[playerX][playerY]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player1.life++;
               break;
           }
@@ -786,19 +771,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.life++;
               break;
           }
@@ -827,19 +812,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.life++;
               break;
           }
@@ -868,19 +853,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.life++;
               break;
           }
@@ -909,19 +894,19 @@ const keyProcessor = (key) => {
           arrays.smallMap[player2X][player2Y] = 'Y';
           switch (arrays.boostersMap[player2X][player2Y]) {
             case 4:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2bomb.firepower++;
               break;
             case 5:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.bombs++;
               break;
             case 6:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.pushAbility = true;
               break;
             case 7:
-              player.play("sounds/booster.mp3");
+              player.play("sounds/boost.mp3");
               player2.life++;
               break;
           }
@@ -987,15 +972,6 @@ const bombTimeChecker = (player, storage, explode) => {
   }
 }
 
-const removeExplosion3 = () => {
-  for (let i = 0; i < smallMap.length; i++) {
-    for (let j = 0; j < smallMap[i].length; j++) {
-      if (smallMap[i][j] === '+') {
-        smallMap[i][j] = 0;
-      }
-    }
-  }
-};
 
 const placeBombPlayer1 = () => {
   if (player1.bombs > 0) {
@@ -1020,10 +996,12 @@ const lifeCheckerPro = () => {
   if(player1.life === 0) {
     console.log('Game over! Player1 has died, Player2 has won!')
     setTimeout(() => {process.exit(0)}, 250);
+    player.play("sounds/death.mp3");
   }
   if (player2.life === 0) {
     console.log('Game over! Player2 has died, Player1 has won!')
     setTimeout(() => {process.exit(0)}, 250);
+    player.play("sounds/death.mp3");
   }
 }
 const game = () => {
@@ -1182,11 +1160,9 @@ module.exports = {
   clearArr,
   explode1,
   explode2,
-  explode3,
   boosterGenerator,
   placeBombPlayer1,
   placeBombPlayer2,
-  placeBombBot1,
   keyProcessor,
   game,
   menuFunc,
