@@ -1261,6 +1261,7 @@ const optionsFunc = () => {
   return menuArr;
 };
 const creditsFunc = () => {
+  player.play("sounds/epic.mp3");
   let stopInterval = setInterval(() => { print(credistFuncInner()) }, 250);
   const credistFuncInner = () => {
     menuArr.splice(0, 1);
