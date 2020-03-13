@@ -36,7 +36,7 @@ let player2bomb = {
   coordY: 0
 };
 
-let brokeable = [0, 1, 'X', 'Y', 4, 5, 6, 7];
+let brokeable = [0, 1, 'X', 'Y', 4, 5, 6, 7, '*', '#'];
 let direction = 'up';
 const explode1 = () => {
   // player.pause("sounds/background.mp3");
