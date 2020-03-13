@@ -201,7 +201,13 @@ const explRemove1 = () => {
       case 'up':
         for (let f = 1; f <= player1bomb.firepower; f++) {
           if (makeItHappen.includes(smallMap[player1bomb.coordX - f][player1bomb.coordY])  === true) {
-            smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0;
+              smallMap[player1bomb.coordX - f][player1bomb.coordY] = 0;
+              if (smallMap[playerX][playerY] !== 9) {
+                smallMap[playerX][playerY] = 'X'
+              }
+              if ( smallMap[player2X][player2Y] !== 8) {
+                smallMap[player2X][player2Y] = 'Y';
+              }
           } else {
             direction = 'right';
             break;
@@ -212,7 +218,13 @@ const explRemove1 = () => {
       case 'right':
         for (let f = 1; f <= player1bomb.firepower; f++) {
           if (makeItHappen.includes(smallMap[player1bomb.coordX][player1bomb.coordY + f]) === true) {
-            smallMap[player1bomb.coordX][player1bomb.coordY + f] = 0;
+              smallMap[player1bomb.coordX][player1bomb.coordY + f] = 0;
+              if (smallMap[playerX][playerY] !== 9) {
+                smallMap[playerX][playerY] = 'X'
+              }
+              if ( smallMap[player2X][player2Y] !== 8) {
+                smallMap[player2X][player2Y] = 'Y';
+              }
           } else {
             direction = 'down';
             break;
@@ -223,7 +235,13 @@ const explRemove1 = () => {
       case 'down':
         for (let f = 1; f <= player1bomb.firepower; f++) {
           if (makeItHappen.includes(smallMap[player1bomb.coordX + f][player1bomb.coordY]) === true) {
-            smallMap[player1bomb.coordX + f][player1bomb.coordY] = 0;
+              smallMap[player1bomb.coordX + f][player1bomb.coordY] = 0;
+              if (smallMap[playerX][playerY] !== 9) {
+                smallMap[playerX][playerY] = 'X'
+              }
+              if ( smallMap[player2X][player2Y] !== 8) {
+                smallMap[player2X][player2Y] = 'Y';
+              }
           } else {
             direction = 'left';
             break;
@@ -234,7 +252,13 @@ const explRemove1 = () => {
       case 'left':
         for (let f = 1; f <= player1bomb.firepower; f++) {
           if (makeItHappen.includes(smallMap[player1bomb.coordX][player1bomb.coordY - f]) === true) {
-            smallMap[player1bomb.coordX][player1bomb.coordY - f] = 0;
+              smallMap[player1bomb.coordX][player1bomb.coordY - f] = 0;
+              if (smallMap[playerX][playerY] !== 9) {
+                smallMap[playerX][playerY] = 'X'
+              }
+              if ( smallMap[player2X][player2Y] !== 8) {
+                smallMap[player2X][player2Y] = 'Y';
+              }
           } else {
             direction = 'up';
             break;
@@ -245,7 +269,14 @@ const explRemove1 = () => {
     }
   }
   smallMap[player1bomb.coordX][player1bomb.coordY] = 0;
-}
+  if (smallMap[playerX][playerY] !== 9) {
+    smallMap[playerX][playerY] = 'X'
+  }
+  if ( smallMap[player2X][player2Y] !== 8) {
+    smallMap[player2X][player2Y] = 'Y';
+  }
+};
+
 let makeItHappen2 = ['#', 0, 'Y', 'X'];
 const explRemove2 = () => {
   for (let i = 0; i < 4; i++) {
@@ -254,6 +285,12 @@ const explRemove2 = () => {
         for (let f = 1; f <= player2bomb.firepower; f++) {
           if (makeItHappen2.includes(smallMap[player2bomb.coordX - f][player2bomb.coordY]) === true) {
             smallMap[player2bomb.coordX - f][player2bomb.coordY] = 0;
+            if (smallMap[playerX][playerY] !== 9) {
+              smallMap[playerX][playerY] = 'X'
+            }
+            if ( smallMap[player2X][player2Y] !== 8) {
+              smallMap[player2X][player2Y] = 'Y';
+            }
           } else {
             direction = 'right';
             break;
@@ -265,6 +302,12 @@ const explRemove2 = () => {
         for (let f = 1; f <= player2bomb.firepower; f++) {
           if (makeItHappen2.includes(smallMap[player2bomb.coordX][player2bomb.coordY + f]) === true) {
             smallMap[player2bomb.coordX][player2bomb.coordY + f] = 0;
+            if (smallMap[playerX][playerY] !== 9) {
+              smallMap[playerX][playerY] = 'X'
+            }
+            if ( smallMap[player2X][player2Y] !== 8) {
+              smallMap[player2X][player2Y] = 'Y';
+            }
           } else {
             direction = 'down';
             break;
@@ -276,6 +319,12 @@ const explRemove2 = () => {
         for (let f = 1; f <= player2bomb.firepower; f++) {
           if (makeItHappen2.includes(smallMap[player2bomb.coordX + f][player2bomb.coordY]) === true) {
             smallMap[player2bomb.coordX + f][player2bomb.coordY] = 0;
+            if (smallMap[playerX][playerY] !== 9) {
+              smallMap[playerX][playerY] = 'X'
+            }
+            if ( smallMap[player2X][player2Y] !== 8) {
+              smallMap[player2X][player2Y] = 'Y';
+            }
           } else {
             direction = 'left';
             break;
@@ -287,6 +336,12 @@ const explRemove2 = () => {
         for (let f = 1; f <= player2bomb.firepower; f++) {
           if (makeItHappen2.includes(smallMap[player2bomb.coordX][player2bomb.coordY - f]) === true) {
             smallMap[player2bomb.coordX][player2bomb.coordY - f] = 0;
+            if (smallMap[playerX][playerY] !== 9) {
+              smallMap[playerX][playerY] = 'X'
+            }
+            if ( smallMap[player2X][player2Y] !== 8) {
+              smallMap[player2X][player2Y] = 'Y';
+            }
           } else {
             direction = 'up';
             break;
@@ -297,6 +352,12 @@ const explRemove2 = () => {
     }
   }
   smallMap[player2bomb.coordX][player2bomb.coordY] = 0;
+  if (smallMap[playerX][playerY] !== 9) {
+    smallMap[playerX][playerY] = 'X'
+  }
+  if ( smallMap[player2X][player2Y] !== 8) {
+    smallMap[player2X][player2Y] = 'Y';
+  }
 }
 
 const largeMapGen = (smallMap) => {
@@ -360,6 +421,62 @@ const largeMapGen = (smallMap) => {
           break;
         case 8:
           largeMapGenAssistant(arrays.playerYbombDesign);
+          break;
+        case 'q':
+          largeMapGenAssistant(arrays.player1win0);
+          break;
+        case 'w': 
+        largeMapGenAssistant(arrays.player1win1);
+          break;
+        case 'e':
+          largeMapGenAssistant(arrays.player1win2);
+          break;
+        case 'r':
+          largeMapGenAssistant(arrays.player1win3);
+          break;
+        case 't':
+          largeMapGenAssistant(arrays.player1win4);
+          break;
+        case 'z':
+          largeMapGenAssistant(arrays.player1win5);
+          break;
+        case 'u':
+          largeMapGenAssistant(arrays.player1win6);
+          break;
+        case 'i':
+          largeMapGenAssistant(arrays.player1win7);
+          break;
+        case 'o':
+          largeMapGenAssistant(arrays.player1win8);
+          break;
+        case 'p':
+          largeMapGenAssistant(arrays.player1win9);
+          break;
+        case 'a':
+          largeMapGenAssistant(arrays.player1win10);
+          break;
+        case 's':
+          largeMapGenAssistant(arrays.player1win11);
+          break;
+        case 'd':
+          largeMapGenAssistant(arrays.player1win12);
+          break;
+        case 'f':
+          largeMapGenAssistant(arrays.player1win13);
+          break;
+        case 'g':
+          largeMapGenAssistant(arrays.player1win14);
+          break;
+        case 'h':
+          largeMapGenAssistant(arrays.player2win6);
+          break;
+        case 'j':
+          largeMapGenAssistant(arrays.player1win15);
+          break;
+        case 'k':
+          largeMapGenAssistant(arrays.player1win16);
+
+            
       }
     }
   }
@@ -955,10 +1072,56 @@ const placeBombPlayer2 = () => {
 const lifeCheckerPro = () => {
   if(player1.life <= 0) {
     console.log('Game over! Player1 has died, Player2 has won!')
+    setTimeout(() => { 
+      for (let i = 0; i < smallMap.length; i++) {
+        for (let j = 0; j < smallMap[i].length; j++) {
+          smallMap[6][4] = 'q'
+          smallMap[6][5] = 'w'
+          smallMap[6][6] = 'e'
+          smallMap[6][7] = 'r'
+          smallMap[6][8] = 't'
+          smallMap[6][9] = 'z'
+          smallMap[6][10] = 'h'
+          smallMap[6][11] = 'j'
+          smallMap[6][12] = 'i'
+          smallMap[6][13] = 'o'
+          smallMap[6][14] = 'p'
+          smallMap[6][15] = 'a'
+          smallMap[6][16] = 'k'
+          smallMap[6][17] = 's'
+          smallMap[6][18] = 'd'
+          smallMap[6][19] = 'f'
+          smallMap[6][20] = 'g'
+        }
+      }
+    }, 200);
     setTimeout(() => {process.exit(0)}, 250);
   }
   if (player2.life <= 0) {
     console.log('Game over! Player2 has died, Player1 has won!')
+    setTimeout(() => { 
+      for (let i = 0; i < smallMap.length; i++) {
+        for (let j = 0; j < smallMap[i].length; j++) {
+          smallMap[6][4] = 'q'
+          smallMap[6][5] = 'w'
+          smallMap[6][6] = 'e'
+          smallMap[6][7] = 'r'
+          smallMap[6][8] = 't'
+          smallMap[6][9] = 'z'
+          smallMap[6][10] = 'u'
+          smallMap[6][11] = 'j'
+          smallMap[6][12] = 'i'
+          smallMap[6][13] = 'o'
+          smallMap[6][14] = 'p'
+          smallMap[6][15] = 'a'
+          smallMap[6][16] = 'k'
+          smallMap[6][17] = 's'
+          smallMap[6][18] = 'd'
+          smallMap[6][19] = 'f'
+          smallMap[6][20] = 'g'
+        }
+      }
+    }, 200);
     setTimeout(() => {process.exit(0)}, 250);
   }
 }
